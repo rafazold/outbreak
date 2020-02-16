@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import ReactTooltip from "react-tooltip";
+import ReactDOM from "react-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import "./App.scss";
+import ChoroplethMap from "./Map/Map";
+
+const App = () => {
+    const [content, setContent] = useState("");
+
+    return (
+    <div>
+        <ChoroplethMap setTooltipContent={setContent}/>
+        <ReactTooltip>{content}</ReactTooltip>
     </div>
-  );
-}
+)};
 
-export default App;
+export default App
