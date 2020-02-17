@@ -1,3 +1,74 @@
+
+
+import React, { memo } from "react";
+import {
+  ZoomableGroup,
+  ComposableMap,
+  Geographies,
+  Geography
+} from "react-simple-maps";
+import geographyObject from "./countries2"
+
+
+const rounded = num => {
+  if (num > 1000000000) {
+    return Math.round(num / 100000000) / 10 + "Bn";
+  } else if (num > 1000000) {
+    return Math.round(num / 100000) / 10 + "M";
+  } else {
+    return Math.round(num / 100) / 10 + "K";
+  }
+};
+
+const MapChart = ({ setTooltipContent }) => {
+  return (
+    <>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+        <ZoomableGroup>
+          <Geographies geography={geographyObject} disableOptimization>
+            {({geographies}) =>
+              geographies.map(geo => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  onMouseEnter={() => {
+                    const { NAME, POP_EST } = geo.properties;
+                    setTooltipContent(`${NAME}`);
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent("");
+                  }}
+                  style={{
+                    default: {
+                      fill: "#797979",
+                      stroke: "#FFF",
+                      strokeWidth: 0.5,
+                      outline: "none",
+                    },
+                    hover: {
+                      fill: "#999",
+                      outline: "none"
+                    },
+                    pressed: {
+                      fill: "#797979",
+                      outline: "none"
+                    }
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+        </ZoomableGroup>
+      </ComposableMap>
+    </>
+  );
+};
+
+export default memo(MapChart);
+
+
+/*
+
 import React, { Component } from "react"
 import { scaleLinear } from "d3-scale"
 // If you want to use an object instead of requesting a file:
@@ -82,3 +153,5 @@ class ChoroplethMap extends Component {
 }
 
 export default ChoroplethMap
+
+*/
