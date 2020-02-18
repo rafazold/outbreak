@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.Header {
+  background-color: #EFEFEF;
+}
+
+.header-brand {
+  color: #565b80 !important;
+  font-family: CocogoosePro;
+  font-size: 19px;
+  font-weight: 600;
+}
+

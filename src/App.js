@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import ReactTooltip from "react-tooltip";
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import ReactDOM from "react-dom";
 
 import "./App.scss";
-import MapChart from "./Map/Map";
+import Map from "./Dashboard/Map/Map";
 import Header from "./Header/Header";
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
     return (
     <div>
         <Header/>
-        <MapChart setTooltipContent={setContent}/>
+        <Map setTooltipContent={setContent}/>
         <ReactTooltip>{content}</ReactTooltip>
     </div>
 )};

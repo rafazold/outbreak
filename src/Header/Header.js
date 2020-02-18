@@ -1,13 +1,14 @@
 import React from 'react';
-import {Navbar, Nav} from 'react-bootstrap';
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
 import './Header.scss';
 
 const Header = () => {
 
     return (
-        <div className="Header">
-            <Navbar className="row justify-content-start" fluid="false" collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand className="navbar-brand" href="#home">The Epidemic Map</Navbar.Brand>
+        <header className="Header">
+            <Navbar collapseOnSelect expand="lg" >
+                <Navbar.Brand className="navbar-brand header-brand" href="#home">The Epidemic Map</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto row justify-content-start">
@@ -17,7 +18,7 @@ const Header = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </div>
+        </header>
     );
 };
 
