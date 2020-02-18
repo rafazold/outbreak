@@ -29,7 +29,7 @@ const Map = ({ setTooltipContent }) => {
                 }}
                 width={800}
                 height={400}
-                style={{ width: "60%", height: "auto" }}
+                style={{ width: "auto", height: "auto" }}
             >
                 <ZoomableGroup>
                     <Geographies geography={geographyObject} disableoptimization="true">

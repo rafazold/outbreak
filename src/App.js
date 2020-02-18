@@ -1,20 +1,21 @@
-import React, {useState} from "react";
-import ReactTooltip from "react-tooltip";
+import React from "react";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import ReactDOM from "react-dom";
 
 import "./App.scss";
-import Map from "./Dashboard/Map/Map";
 import Header from "./Header/Header";
+import Dashboard from "./Dashboard/Dashboard";
+import {Container} from "react-bootstrap";
 
 const App = () => {
-    const [content, setContent] = useState("");
 
     return (
-    <div>
-        <Header/>
-        <Map setTooltipContent={setContent}/>
-        <ReactTooltip>{content}</ReactTooltip>
+    <div className="wrapper">
+        <Container>
+            <Header/>
+            <Dashboard/>
+        </Container>
     </div>
 )};
 

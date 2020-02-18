@@ -1,0 +1,31 @@
+
+.dashboard {
+  display: grid;
+  margin-top: 3em;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.dashboard-header-select {
+  margin-bottom: 1.5em;
+}
+
+.map {
+  display: inline;
+}
+
+.dashboard-header {
+  grid-column: 1 / 4;
+}
+
+.stats {
+  grid-column: 1 / 2;
+}
+
+.map {
+  grid-column: 2 / 4;
+}
+
+.reports {
+  grid-column: 1 / 4;
+}
