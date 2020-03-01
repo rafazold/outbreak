@@ -1,4 +1,106 @@
-.stats-feed-header {
-  display: inline-flex;
-  justify-content: space-between;
+.stats {
+    grid-column: 1 / 2;
+
+    .stats-feed-header {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        border-bottom: solid #565b8033 1px;
+
+        .feed-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            font-weight: 700;
+            color: #565b80;
+            line-height: 1;
+            .feed-title-top {
+                font-size: 1.25em;
+            }
+            .feed-title-bottom {
+                font-size: 2em;
+            }
+        }
+        .feed-read {
+            width: 71px;
+            height: 21px;
+            border-radius: 13px;
+            background-color: #565b80;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            margin-bottom: 4px;
+            align-self: flex-end;
+        }
+    }
+}
+
+.feed-content {
+    .feed-content-numbers {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        padding-top: 14px;
+        border-bottom: solid #565b8033 1px;
+
+        .feed-content-numbers-item {
+            display: flex;
+            flex-direction: column;
+            .feed-content-numbers-title {
+                display: flex;
+                justify-content: flex-start;
+                font-size: 25px;
+                .feed-content-numbers-icon {
+                    margin-right: 5px;
+                }
+                .feed-content-numbers-title-text {
+
+                }
+            }
+            .feed-content-numbers-value {
+                font-size: 50px;
+                font-family: "Odibee Sans";
+            }
+        }
+    }
+    .feed-content-source {
+        display: flex;
+        padding: 14px 0;
+        border-bottom: solid #565b8033 1px;
+
+        .feed-content-source-title {
+            font-size: 25px;
+            margin-right: 15px;
+        }
+        .feed-content-source-flag {
+            display: inline-block;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 33px;
+        }
+    }
+    .feed-content-countries {
+        padding: 0 0 14px 0;
+        border-bottom: solid #565b8033 1px;
+
+        .feed-content-countries-title {
+            display: block;
+            font-size: 25px;
+            padding: 14px 0;
+        }
+        .feed-content-flags {
+            display: flex;
+            flex-wrap: wrap;
+            .feed-content-flag {
+                display: inline-block;
+                margin: 0 8px 8px 0;
+                border-radius: 4px;
+                overflow: hidden;
+                height: 26px;
+            }
+        }
+    }
 }

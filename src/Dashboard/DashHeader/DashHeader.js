@@ -1,7 +1,7 @@
 import React from 'react';
-import "./Title.scss";
+import "./DashHeader.scss";
 
-function Title(props) {
+function DashHeader(props) {
     return (
         <div className="dashboard-header">
             <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
@@ -16,4 +16,4 @@ function Title(props) {
     );
 }
 
-export default Title;
+export default DashHeader;
