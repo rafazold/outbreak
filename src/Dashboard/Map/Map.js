@@ -24,11 +24,11 @@ const Map = ({ setTooltipContent }) => {
             <ComposableMap
                 data-tip=""
                 projectionConfig={{
-                    scale: 155,
+                    scale: 165,
                     rotation: [-11, 0, 0],
                 }}
                 width={800}
-                height={400}
+                height={500}
                 style={{ width: "auto", height: "auto" }}
             >
                 <ZoomableGroup>
@@ -48,7 +48,7 @@ const Map = ({ setTooltipContent }) => {
                                     }}
                                     style={{
                                         default: {
-                                            fill: "#797979",
+                                            fill: "#565b80",
                                             stroke: "#FFF",
                                             strokeWidth: 0.5,
                                             outline: "none",

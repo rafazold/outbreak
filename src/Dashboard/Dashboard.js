@@ -13,7 +13,7 @@ function Dashboard() {
             <DashHeader/>
             <StatsFeed/>
             <Map setTooltipContent={setContent}/>
-            <ReactTooltip>{content}</ReactTooltip>
+            <ReactTooltip multiline={true} html={true}> {`${content}<br />${content}<br />${content}`}</ReactTooltip>
             <div className="reports">REPORTS</div>
         </div>
     );
