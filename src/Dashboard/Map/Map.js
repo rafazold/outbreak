@@ -18,7 +18,25 @@ const rounded = num => {
     }
 };
 
-const Map = ({ setTooltipContent }) => {
+const formatName = (country) => {
+    if(country === 'China') {
+        return 'Mainland_China'
+    }
+    if(country === 'United States of America') {
+        return 'US'
+    }
+    const nameArr = country.split(' ');
+    const newArr = nameArr.map(str => {
+        if (str === ' ') {
+            return '_'
+        }
+        return str;
+    });
+    return newArr.join('_');
+
+};
+
+const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualties }) => {
     return (
         <div className="map">
             <ComposableMap
@@ -39,22 +57,38 @@ const Map = ({ setTooltipContent }) => {
                                     key={geo.rsmKey}
                                     geography={geo}
                                     onMouseEnter={() => {
-                                        const { NAME, POP_EST } = geo.properties;
-                                        console.log(geo.properties.Name)
-                                        setTooltipContent(`${NAME}`);
+                                        const { NAME } = geo.properties;
+                                        const infectedValue = () => {
+                                            if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
+                                                return infected[(formatName(geo.properties.NAME))].confirmed;
+                                            }
+                                            return 0;
+                                        };
+                                        const casualtiesValue = () => {if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
+                                            return infected[(formatName(geo.properties.NAME))].deaths;
+                                        }
+                                            return 0;
+
+                                        }
+                                        console.log(formatName(geo.properties.NAME), infectedValue() || 0)
+                                        setToolpitName(`${NAME}`);
+                                        setToolpitInfected(`infected: ${infectedValue()}`);
+                                        setToolpitCasualties(`casualties: ${casualtiesValue()}`)
                                     }}
                                     onMouseLeave={() => {
-                                        setTooltipContent("");
+                                        setToolpitName("");
+                                        setToolpitInfected("");
+                                        setToolpitCasualties("");
                                     }}
                                     style={{
                                         default: {
-                                            fill: "#565b80",
+                                            fill: "#999",
                                             stroke: "#FFF",
                                             strokeWidth: 0.5,
                                             outline: "none",
                                         },
                                         hover: {
-                                            fill: "#999",
+                                            fill: "#565b80",
                                             outline: "none"
                                         },
                                         pressed: {
