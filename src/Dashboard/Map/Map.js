@@ -60,17 +60,16 @@ const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualtie
                                         const { NAME } = geo.properties;
                                         const infectedValue = () => {
                                             if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
-                                                return infected[(formatName(geo.properties.NAME))].confirmed;
+                                                return infected[(formatName(geo.properties.NAME))].confirmed.toLocaleString();
                                             }
                                             return 0;
                                         };
                                         const casualtiesValue = () => {if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
-                                            return infected[(formatName(geo.properties.NAME))].deaths;
+                                            return infected[(formatName(geo.properties.NAME))].deaths.toLocaleString();
                                         }
                                             return 0;
 
                                         }
-                                        console.log(formatName(geo.properties.NAME), infectedValue() || 0)
                                         setToolpitName(`${NAME}`);
                                         setToolpitInfected(`infected: ${infectedValue()}`);
                                         setToolpitCasualties(`casualties: ${casualtiesValue()}`)

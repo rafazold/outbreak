@@ -2,9 +2,37 @@ import "./StatsFeed.scss";
 
 import React from 'react';
 import Flag from 'react-world-flags'
+const { getCode, getName } = require('country-list');
 
-function StatsFeed() {
+function StatsFeed({totalStats, infectedGeos}) {
+    console.log('looooo', infectedGeos)
     const infectedCountries = ['CN', 'IT', 'JP', 'FR', 'ES', 'US', "AR", 'IL', 'NO']
+    const infectedCountries1 = infectedGeos.map(geo => {
+        if (geo.toLowerCase() === 'mainland_china') {
+            return 'CN'
+        }
+        if (geo.toLowerCase() === 'south_korea') {
+            return 'KR'
+        }
+        if (geo.toLowerCase() === 'taiwan') {
+            return 'TW'
+        }
+        if (geo.toLowerCase() === 'others') {
+            return ''
+        }
+        if (geo.toLowerCase() === 'iran') {
+            return 'IR'
+        }
+        if (geo.length < 4) {
+            return geo;
+        }
+
+        console.log("geo: ", geo, '|', geo.split('_').join(' '), '|', getCode(geo.split('_').join(' ')))
+        return getCode(geo.split("_").join(' '));
+
+    })
+    console.log(infectedCountries1)
+    console.log("code: ", getName("BL"));
     return (
         <article className="stats">
             <header className="stats-feed-header">
@@ -23,14 +51,18 @@ function StatsFeed() {
                             </span>
                             <span className="feed-content-numbers-title-text">Infected</span>
                         </span>
-                        <span  className="feed-content-numbers-value">128,257</span>
+                        <span  className="feed-content-numbers-value">
+                            {totalStats.confirmed ? totalStats.confirmed.toLocaleString() : 0}
+                        </span>
                     </span>
                     <span className="feed-content-numbers-item">
                         <span className="feed-content-numbers-title">
                             <span className="feed-content-numbers-icon"><img src="./assets/grave.svg" alt="grave"/></span>
                             <span className="feed-content-numbers-title-text">Casualties</span>
                         </span>
-                        <span  className="feed-content-numbers-value">778</span>
+                        <span  className="feed-content-numbers-value">
+                            {totalStats.deaths ? totalStats.deaths.toLocaleString() : 0}
+                        </span>
                     </span>
                 </div>
                 <div className="feed-content-source">
