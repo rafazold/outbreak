@@ -5,7 +5,6 @@ import Flag from 'react-world-flags'
 const { getCode, getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos}) {
-    console.log('looooo', infectedGeos)
     const infectedCountries = ['CN', 'IT', 'JP', 'FR', 'ES', 'US', "AR", 'IL', 'NO']
     const infectedCountries1 = infectedGeos.map(geo => {
         if (geo.toLowerCase() === 'mainland_china') {
@@ -27,12 +26,9 @@ function StatsFeed({totalStats, infectedGeos}) {
             return geo;
         }
 
-        console.log("geo: ", geo, '|', geo.split('_').join(' '), '|', getCode(geo.split('_').join(' ')))
         return getCode(geo.split("_").join(' '));
 
     })
-    console.log(infectedCountries1)
-    console.log("code: ", getName("BL"));
     return (
         <article className="stats">
             <header className="stats-feed-header">
@@ -52,7 +48,7 @@ function StatsFeed({totalStats, infectedGeos}) {
                             <span className="feed-content-numbers-title-text">Infected</span>
                         </span>
                         <span  className="feed-content-numbers-value">
-                            {totalStats.confirmed ? totalStats.confirmed.toLocaleString() : 0}
+                            {totalStats.cases ? totalStats.cases.toLocaleString() : 0}
                         </span>
                     </span>
                     <span className="feed-content-numbers-item">

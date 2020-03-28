@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import './Map.scss';
 import {
     ZoomableGroup,
     ComposableMap,
@@ -36,7 +37,7 @@ const formatName = (country) => {
 
 };
 
-const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualties }) => {
+const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualties, setToolpitRecovered }) => {
     return (
         <div className="map">
             <ComposableMap
@@ -58,26 +59,25 @@ const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualtie
                                     geography={geo}
                                     onMouseEnter={() => {
                                         const { NAME } = geo.properties;
-                                        const infectedValue = () => {
-                                            if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
-                                                return infected[(formatName(geo.properties.NAME))].confirmed.toLocaleString();
+                                        const getValue = (dataType) => {
+                                            if (typeof infected[(geo.properties.ISO_A2)] !== "undefined") {
+                                                return infected[(geo.properties.ISO_A2)][dataType].toLocaleString();
+                                            } else if (typeof infected[(geo.properties.WB_A2)] !== "undefined") {
+                                                return infected[(geo.properties.WB_A2)][dataType].toLocaleString();
                                             }
                                             return 0;
                                         };
-                                        const casualtiesValue = () => {if (typeof infected[(formatName(geo.properties.NAME))] !== "undefined") {
-                                            return infected[(formatName(geo.properties.NAME))].deaths.toLocaleString();
-                                        }
-                                            return 0;
 
-                                        }
                                         setToolpitName(`${NAME}`);
-                                        setToolpitInfected(`infected: ${infectedValue()}`);
-                                        setToolpitCasualties(`casualties: ${casualtiesValue()}`)
+                                        setToolpitInfected(`infected: ${getValue("cases")}`);
+                                        setToolpitCasualties(`casualties: ${getValue("deaths")}`);
+                                        setToolpitRecovered(`recovered: ${getValue("recovered")}`)
                                     }}
                                     onMouseLeave={() => {
-                                        setToolpitName("");
-                                        setToolpitInfected("");
-                                        setToolpitCasualties("");
+                                        setToolpitName("Total");
+                                        setToolpitInfected(`infected: ${infected.totals.cases.toLocaleString()}`);
+                                        setToolpitCasualties(`casualties: ${infected.totals.deaths.toLocaleString()}`)
+                                        setToolpitRecovered(`recovered: ${infected.totals.recovered.toLocaleString()}`)
                                     }}
                                     style={{
                                         default: {

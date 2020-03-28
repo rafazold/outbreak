@@ -1,0 +1,23 @@
+.reports-feed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.react_tinylink_card {
+    margin-bottom: 3vh;
+    border-radius: 5px;
+}
+
+.report {
+    display: contents;
+}
+
+.hidden {
+    display: none;
+}
+
+.read-more {
+    text-align: center;
+    cursor: pointer;
+}
