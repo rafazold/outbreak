@@ -14,18 +14,13 @@ function Dashboard() {
     const [toolpitCasualties, setToolpitCasualties] = useState("");
     const [toolpitRecovered, setToolpitRecovered] = useState("");
     const affectedCountries = {};
-    const [CountriesObject, setCountriesObject] = useState({});
+    const [countriesObject, setCountriesObject] = useState({});
     const [fetching, setFetching] = useState(true);
     const [total, setTotal] = useState({});
 
 
 
-    useEffect(() => {
-        fetch('https://corona.lmao.ninja/v2/historical')
-            .then(res => res.json())
-            .then((x => console.log(x)))
 
-    }, [])
 
     // useEffect(() => {
     //     fetch('https://cors-anywhere.herokuapp.com/' + 'https://covid2019-api.herokuapp.com/current_list')
@@ -67,13 +62,13 @@ function Dashboard() {
             <DashHeader/>
             <StatsFeed
                 totalStats={total}
-                infectedGeos={Object.keys(CountriesObject)}
+                infectedGeos={Object.keys(countriesObject)}
             />
             <Map setToolpitName={setToolpitGeo}
                  setToolpitInfected={setToolpitInfected}
                  setToolpitCasualties={setToolpitCasualties}
                  setToolpitRecovered={setToolpitRecovered}
-                 infected={CountriesObject}
+                 infected={countriesObject}
             />
             <p data-tip='' data-for='toolpit'></p>
             {/*<ReactTooltip id='toolpit' getContent={() => { return null }}/>*/}

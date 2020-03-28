@@ -2,6 +2,7 @@ import "./StatsFeed.scss";
 
 import React from 'react';
 import Flag from 'react-world-flags'
+import TimelineGraph from "./TimelineGraph/TimelineGraph";
 const { getCode, getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos}) {
@@ -77,7 +78,9 @@ function StatsFeed({totalStats, infectedGeos}) {
                             ))}
                     </div>
                 </div>
-                <div className="feed-content-graph">graph</div>
+                <div className="feed-content-graph">
+                    <TimelineGraph geo='usa'/>
+                </div>
             </div>
         </article>
     );
