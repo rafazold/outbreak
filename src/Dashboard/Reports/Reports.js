@@ -42,7 +42,7 @@ function Reports() {
         <div className="reports-wrapper">
             <div className="reports-feed">
                 {links.map((link, index) => (
-                    <article className={`report ${index > 11 ? hide : ""}`}>
+                    <article className={`report ${index > 3 ? hide : ""}`}>
                         {/*    <LazyLoad*/}
                         {/*    height={100}*/}
                         {/*    placeholder={<span>wait</span>}*/}

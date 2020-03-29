@@ -10,12 +10,11 @@ import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'rec
 
 const TimelineGraph = ({geo}) => {
     const [timeObject, setTimeObject] = useState({});
+    const [country, setCountry] = useState('us')
 
     useEffect(() => {
         getGeoTimeline(geo);
-
-
-    }, [])
+    }, [geo])
 
     const makeObject = (data, geo) => {
         const timelineObj = {...timeObject};
@@ -44,14 +43,13 @@ const TimelineGraph = ({geo}) => {
             .then(data => makeObject(data, geo))
             .then(timelineObj => {
                 setTimeObject(timelineObj)
-                console.log('fetched', timelineObj)
             })
             // .then(x => console.log('fetched', x))
             .catch(err => console.log('error fetching Data'))
     }
 
     return (
-        <LineChart width={400} height={200} data={timeObject[geo]}
+        <LineChart width={1000} height={250} data={timeObject[geo]}
                    margin={{top: 5, right: 30, left: 0, bottom: 5}}>
             <XAxis dataKey="date"/>
             <YAxis/>
