@@ -4,59 +4,80 @@ import React from 'react';
 import Flag from 'react-world-flags'
 import TimelineGraph from "../Graph/TimelineGraph/TimelineGraph";
 import GraphHeader from "../Graph/GraphHeader/GraphHeader";
+import ReactTooltip from "react-tooltip";
+import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
+const { getCode, getName } = require('country-list');
 
-function StatsFeed({totalStats, infectedGeos}) {
+function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
+
+    const tooltip = (country) => {
+
+        console.log('yooo', countriesObject)
+        const geo = country
+        // setTooltipGeo('US')
+        setTooltipGeo(getName(country))
+        setTooltipInfected(`infected: ${countriesObject[country].cases.toLocaleString()}`);
+        setTooltipCasualties(`casualties: ${countriesObject[country].deaths.toLocaleString()}`);
+        setTooltipRecovered(`recovered: ${countriesObject[country].recovered.toLocaleString()}`)
+    }
 
     return (
         <article className="stats">
-                <header className="stats-feed-header">
-                <span className="feed-title">
-                    <span className="feed-title-top">World Wide</span>
-                    <span className="feed-title-bottom">Coronavirus</span>
+            <header className="stats-feed-header">
+            <span className="feed-title">
+                <span className="feed-title-top">World Wide</span>
+                <span className="feed-title-bottom">Coronavirus</span>
+            </span>
+                <span className="feed-read">Read</span>
+            </header>
+            <div className="feed-content">
+                <div className="feed-content-numbers information">
+                <span className="feed-content-numbers-item">
+                    <span className="feed-content-numbers-title">
+                        <span className="feed-content-numbers-icon">
+                            <img src="./assets/cell-division.svg" alt="cell-icon"/>
+                        </span>
+                        <span className="feed-content-numbers-title-text">Infected</span>
+                    </span>
+                    <span className="feed-content-numbers-value">
+                        {totalStats.cases ? totalStats.cases.toLocaleString() : 0}
+                    </span>
                 </span>
-                    <span className="feed-read">Read</span>
-                </header>
-                <div className="feed-content">
-                    <div className="feed-content-numbers information">
                     <span className="feed-content-numbers-item">
-                        <span className="feed-content-numbers-title">
-                            <span className="feed-content-numbers-icon">
-                                <img src="./assets/cell-division.svg" alt="cell-icon"/>
-                            </span>
-                            <span className="feed-content-numbers-title-text">Infected</span>
-                        </span>
-                        <span className="feed-content-numbers-value">
-                            {totalStats.cases ? totalStats.cases.toLocaleString() : 0}
-                        </span>
+                    <span className="feed-content-numbers-title">
+                        <span className="feed-content-numbers-icon"><img src="./assets/grave.svg"
+                                                                         alt="grave"/></span>
+                        <span className="feed-content-numbers-title-text">Casualties</span>
                     </span>
-                        <span className="feed-content-numbers-item">
-                        <span className="feed-content-numbers-title">
-                            <span className="feed-content-numbers-icon"><img src="./assets/grave.svg"
-                                                                             alt="grave"/></span>
-                            <span className="feed-content-numbers-title-text">Casualties</span>
-                        </span>
-                        <span className="feed-content-numbers-value">
-                            {totalStats.deaths ? totalStats.deaths.toLocaleString() : 0}
-                        </span>
+                    <span className="feed-content-numbers-value">
+                        {totalStats.deaths ? totalStats.deaths.toLocaleString() : 0}
                     </span>
-                    </div>
-                    <div className="feed-content-source information">
-                        <span className="feed-content-source-title">Source of outbreak</span>
-                        <span className="feed-content-source-flag">
-                        <Flag code={"CN"} height={"100%"}/>
-                    </span>
-                    </div>
-                    <div className="feed-content-countries information">
-                        <span className="feed-content-countries-title">Infected Countries</span>
-                        <div className="feed-content-flags">
-                            {infectedGeos.slice(0, 14).map(country => (
-                                <span className="feed-content-flag">
-                                <Flag code={country} height={"100%"}/>
-                            </span>
-                            ))}
-                        </div>
+                </span>
+                </div>
+                <div className="feed-content-source information">
+                    <span className="feed-content-source-title">Source of outbreak</span>
+                    <span className="feed-content-source-flag">
+                    <Flag code={"CN"} height={"100%"}/>
+                </span>
+                </div>
+                <div className="feed-content-countries information">
+                    <span className="feed-content-countries-title">Infected Countries</span>
+                    <div className="feed-content-flags" data-tip="">
+                        {infectedGeos.slice(0, 14).map(country => (
+                        <span className="feed-content-flag">
+                            <Flag code={country} height={"100%"} onMouseEnter={() => tooltip(country)} />
+                        </span>
+                        ))}
                     </div>
                 </div>
+            </div>
+            {/*<p data-tip='' data-for='tooltip1'></p>*/}
+            {/*<ReactTooltip html={true}*/}
+            {/*              id={`tooltip1 ${console.log('WTF???')}`}*/}
+            {/*              // id={tooltipGeo === '' ? '' : `tooltip`}*/}
+            {/*>*/}
+            {/*    <span>'hello'</span>*/}
+            {/*</ReactTooltip>*/}
             </article>
     );
 }

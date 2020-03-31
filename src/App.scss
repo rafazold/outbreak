@@ -3,3 +3,9 @@ body {
   font: normal 16px Poppins, sans-serif;
   color: #565b80;
 }
+
+.lock-scroll {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+}

@@ -13,9 +13,13 @@ function GraphHeader({geos, setGraphGeo}) {
         <div className="dashboard-header">
             <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
             <select className="dashboard-header-select" name="searchType" id="searchType" onChange={handleSelect}>Select
-                {geos.map(geo => (
-                    <option value={geo}>{geo}</option>
-                ))}
+                {geos.map(geo => {
+                    // if (geo) {
+                    //     const countryName =
+                    // }
+                    return (
+                    <option value={geo}>{geo ? getName(geo) : geo}</option>
+                )})}
             </select>
         </div>
     );

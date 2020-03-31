@@ -14,7 +14,6 @@
 
 .dashboard-header-select {
     margin-bottom: 1.5em;
-    width: 10vw;
     height: 1.8vw;
     object-fit: contain;
     border-radius: 6px;
@@ -22,6 +21,9 @@
     background-color: var(--white);
     text-align-last: center;
     color: #565b80;
+    &:focus {
+        outline: none;
+    }
 }
 
 .dashboard-header {

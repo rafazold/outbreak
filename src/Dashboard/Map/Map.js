@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import './Map.scss';
 import {
     ZoomableGroup,
@@ -7,7 +7,6 @@ import {
     Geography
 } from "react-simple-maps";
 import geographyObject from "./countries2"
-
 
 const rounded = num => {
     if (num > 1000000000) {
@@ -37,48 +36,94 @@ const formatName = (country) => {
 
 };
 
-const Map = ({ setToolpitName, setToolpitInfected, infected, setToolpitCasualties, setToolpitRecovered }) => {
+
+
+
+
+const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
+    const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
+
+    const handleZoomIn = () => {
+        if (position.zoom >= 4) return;
+        setPosition(pos => ({ ...pos, zoom: pos.zoom * 1.1 }));
+    }
+
+    const handleZoomOut = () => {
+        if (position.zoom / 1.1 <= 1) {
+            setPosition(pos => ({ ...pos, zoom: 1 }));
+            return
+        }
+        setPosition(pos => ({ ...pos, zoom: pos.zoom / 1.1 }));
+    };
+
+    const handleWheel = (event) => {
+        event.preventDefault();
+
+        if (event.deltaY > 0) {
+            event.preventDefault();
+            handleZoomOut()
+        }
+        if (event.deltaY < 0) {
+            event.preventDefault();
+            handleZoomIn()
+        }
+    }
+
+    const handleMouseEnter =  (geo, dataObj) => {
+        const getValueFromCountryObject = (dataType, dataObj, geo) => {
+            if (typeof dataObj[(geo.properties.ISO_A2)] !== "undefined") {
+                return dataObj[(geo.properties.ISO_A2)][dataType].toLocaleString();
+            } else if (typeof dataObj[(geo.properties.WB_A2)] !== "undefined") {
+                return dataObj[(geo.properties.WB_A2)][dataType].toLocaleString();
+            }
+            return 0;
+        };
+
+        const { NAME } = geo.properties;
+        setTooltipGeo(`${NAME}`);
+        setTooltipInfected(`infected: ${getValueFromCountryObject("cases", dataObj, geo)}`);
+        setTooltipCasualties(`casualties: ${getValueFromCountryObject("deaths", dataObj, geo)}`);
+        setTooltipRecovered(`recovered: ${getValueFromCountryObject("recovered", dataObj, geo)}`)
+    }
+    const handleMouseLeave = (dataObj) => {
+        setTooltipGeo("Total");
+        setTooltipInfected(`infected: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
+        setTooltipCasualties(`casualties: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`)
+        setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`)
+    }
+
+    const lockScroll = () => {
+        document.body.classList.add("lock-scroll")
+    };
+    const allowScroll = () => {
+        document.body.classList.remove("lock-scroll")
+    };
+
     return (
-        <div className="map">
-            <ComposableMap
-                data-tip=""
-                projectionConfig={{
-                    scale: 165,
-                    rotation: [-11, 0, 0],
-                }}
-                width={800}
-                height={500}
-                style={{ width: "auto", height: "auto" }}
-            >
-                <ZoomableGroup>
-                    <Geographies geography={geographyObject} disableoptimization="true">
+
+
+        <div className="map" onMouseEnter={lockScroll} onMouseLeave={allowScroll}>
+                <ComposableMap
+                    data-tip=""
+                    width={800}
+                    height={500}
+                    style={{ width: "auto", height: "auto" }}
+                >
+                <ZoomableGroup
+                    zoom={position.zoom}
+                    center={position.coordinates}
+                    
+
+                >
+                    <Geographies geography={geographyObject} >
                         {({geographies}) =>
                             geographies.map(geo => (
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
-                                    onMouseEnter={() => {
-                                        const { NAME } = geo.properties;
-                                        const getValue = (dataType) => {
-                                            if (typeof infected[(geo.properties.ISO_A2)] !== "undefined") {
-                                                return infected[(geo.properties.ISO_A2)][dataType].toLocaleString();
-                                            } else if (typeof infected[(geo.properties.WB_A2)] !== "undefined") {
-                                                return infected[(geo.properties.WB_A2)][dataType].toLocaleString();
-                                            }
-                                            return 0;
-                                        };
-
-                                        setToolpitName(`${NAME}`);
-                                        setToolpitInfected(`infected: ${getValue("cases")}`);
-                                        setToolpitCasualties(`casualties: ${getValue("deaths")}`);
-                                        setToolpitRecovered(`recovered: ${getValue("recovered")}`)
-                                    }}
-                                    onMouseLeave={() => {
-                                        setToolpitName("Total");
-                                        setToolpitInfected(`infected: ${infected.totals.cases.toLocaleString()}`);
-                                        setToolpitCasualties(`casualties: ${infected.totals.deaths.toLocaleString()}`)
-                                        setToolpitRecovered(`recovered: ${infected.totals.recovered.toLocaleString()}`)
-                                    }}
+                                    onWheel={handleWheel}
+                                    onMouseEnter={() => handleMouseEnter(geo, countriesObject)}
+                                    onMouseLeave={() => handleMouseLeave(countriesObject)}
                                     style={{
                                         default: {
                                             fill: "#999",

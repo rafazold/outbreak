@@ -24,7 +24,7 @@ const TimelineGraph = ({geo}) => {
             const datesObj = timeline[type];
             for (const date in datesObj) {
                 if(!timelineObj[geo][date]) {
-                    timelineObj[geo][date] = {date,}
+                    timelineObj[geo][date] = {date}
                 }
                 timelineObj[geo][date][type] = datesObj[date]
 
@@ -52,7 +52,7 @@ const TimelineGraph = ({geo}) => {
         <LineChart width={1000} height={250} data={timeObject[geo]}
                    margin={{top: 5, right: 30, left: 0, bottom: 5}}>
             <XAxis dataKey="date"/>
-            <YAxis/>
+            <YAxis type="number" domain={[2, 'auto']} />/>
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip/>
             <Legend />

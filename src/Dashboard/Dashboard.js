@@ -12,10 +12,10 @@ const { getCode, getName } = require('country-list');
 
 
 function Dashboard() {
-    const [toolpitGeo, setToolpitGeo] = useState("");
-    const [toolpitInfected, setToolpitInfected] = useState("");
-    const [toolpitCasualties, setToolpitCasualties] = useState("");
-    const [toolpitRecovered, setToolpitRecovered] = useState("");
+    const [tooltipGeo, setTooltipGeo] = useState("");
+    const [tooltipInfected, setTooltipInfected] = useState("");
+    const [tooltipCasualties, setTooltipCasualties] = useState("");
+    const [tooltipRecovered, setTooltipRecovered] = useState("");
     const affectedCountries = {};
     const [countriesObject, setCountriesObject] = useState({});
     const [fetching, setFetching] = useState(true);
@@ -60,25 +60,29 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
+            <Map setTooltipGeo={setTooltipGeo}
+                 setTooltipInfected={setTooltipInfected}
+                 setTooltipCasualties={setTooltipCasualties}
+                 setTooltipRecovered={setTooltipRecovered}
+                 countriesObject={countriesObject}
+            />
             <StatsFeed
                 totalStats={total}
                 infectedGeos={countryList}
+                setTooltipGeo={setTooltipGeo}
+                setTooltipInfected={setTooltipInfected}
+                setTooltipCasualties={setTooltipCasualties}
+                setTooltipRecovered={setTooltipRecovered}
+                countriesObject={countriesObject}
             />
-            <Map setToolpitName={setToolpitGeo}
-                 setToolpitInfected={setToolpitInfected}
-                 setToolpitCasualties={setToolpitCasualties}
-                 setToolpitRecovered={setToolpitRecovered}
-                 infected={countriesObject}
-            />
-            <p data-tip='' data-for='toolpit'></p>
-            {/*<ReactTooltip id='toolpit' getContent={() => { return null }}/>*/}
+            <p data-tip='' data-for='tooltip'></p>
             <ReactTooltip html={true}
-                          id={toolpitGeo === '' ? '' : 'toolpit'}
+                          id={tooltipGeo === '' ? '' : `tooltip`}
             >
-                {`${toolpitGeo}<br />
-                ${toolpitInfected}<br />
-                ${toolpitCasualties}<br />
-                ${toolpitRecovered}`
+                {`${tooltipGeo}<br />
+                ${tooltipInfected}<br />
+                ${tooltipCasualties}<br />
+                ${tooltipRecovered}`
                 }
             </ReactTooltip>
             <StatsFooter geos={infectedCountries}/>
