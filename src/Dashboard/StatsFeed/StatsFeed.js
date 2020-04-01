@@ -72,14 +72,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     </div>
                 </div>
             </div>
-            {/*<p data-tip='' data-for='tooltip1'></p>*/}
-            {/*<ReactTooltip html={true}*/}
-            {/*              id={`tooltip1 ${console.log('WTF???')}`}*/}
-            {/*              // id={tooltipGeo === '' ? '' : `tooltip`}*/}
-            {/*>*/}
-            {/*    <span>'hello'</span>*/}
-            {/*</ReactTooltip>*/}
-            </article>
+        </article>
     );
 }
 
