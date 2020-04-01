@@ -34,6 +34,10 @@
             font-size: 13px;
             margin-bottom: 4px;
             align-self: flex-end;
+            a {
+                text-decoration: none;
+                color: white;
+            }
         }
     }
 }
@@ -100,7 +104,14 @@
                 border-radius: 4px;
                 overflow: hidden;
                 height: 26px;
+
+                img{
+                    &:hover {
+                    border: solid black 1px;
+                    }
+                }
             }
         }
     }
 }
+

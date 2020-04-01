@@ -12,7 +12,6 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
 
     const tooltip = (country) => {
 
-        console.log('yooo', countriesObject)
         const geo = country
         // setTooltipGeo('US')
         setTooltipGeo(getName(country))
@@ -28,7 +27,9 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 <span className="feed-title-top">World Wide</span>
                 <span className="feed-title-bottom">Coronavirus</span>
             </span>
-                <span className="feed-read">Read</span>
+                <span className="feed-read">
+                    <a href="https://en.wikipedia.org/wiki/Coronavirus_disease_2019" target="_blank" >Read</a
+                    ></span>
             </header>
             <div className="feed-content">
                 <div className="feed-content-numbers information">
@@ -37,7 +38,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                         <span className="feed-content-numbers-icon">
                             <img src="./assets/cell-division.svg" alt="cell-icon"/>
                         </span>
-                        <span className="feed-content-numbers-title-text">Infected</span>
+                        <span className="feed-content-numbers-title-text">Cases</span>
                     </span>
                     <span className="feed-content-numbers-value">
                         {totalStats.cases ? totalStats.cases.toLocaleString() : 0}
@@ -61,9 +62,9 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 </span>
                 </div>
                 <div className="feed-content-countries information">
-                    <span className="feed-content-countries-title">Infected Countries</span>
+                    <span className="feed-content-countries-title">Most Affected Countries</span>
                     <div className="feed-content-flags" data-tip="">
-                        {infectedGeos.slice(0, 14).map(country => (
+                        {infectedGeos.slice(0, 22).map(country => (
                         <span className="feed-content-flag">
                             <Flag code={country} height={"100%"} onMouseEnter={() => tooltip(country)} />
                         </span>

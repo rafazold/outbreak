@@ -3,10 +3,10 @@ import GraphHeader from "../Graph/GraphHeader/GraphHeader";
 import TimelineGraph from "../Graph/TimelineGraph/TimelineGraph";
 
 function StatsFooter({geos}) {
-    const [graphGeo, setGraphGeo] = useState('usa')
+    const [graphGeo, setGraphGeo] = useState('usa');
     return (
         <footer className="feed-content-graph">
-            <GraphHeader geos={geos} setGraphGeo={setGraphGeo}/>
+            <GraphHeader geos={geos} setGraphGeo={setGraphGeo} graphGeo={graphGeo}/>
             <TimelineGraph geo={graphGeo}/>
         </footer>
     );

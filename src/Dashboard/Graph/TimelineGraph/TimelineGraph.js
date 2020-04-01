@@ -29,7 +29,6 @@ const TimelineGraph = ({geo}) => {
                 timelineObj[geo][date][type] = datesObj[date]
 
                 }
-                // console.log('key: ', type, 'datesObj: ', datesObj)
             }
         timelineObj[geo] = Object.values(timelineObj[geo])
         return (timelineObj)
@@ -44,7 +43,6 @@ const TimelineGraph = ({geo}) => {
             .then(timelineObj => {
                 setTimeObject(timelineObj)
             })
-            // .then(x => console.log('fetched', x))
             .catch(err => console.log('error fetching Data'))
     }
 
