@@ -81,14 +81,14 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
 
         const { NAME } = geo.properties;
         setTooltipGeo(`${NAME}`);
-        setTooltipInfected(`infected: ${getValueFromCountryObject("cases", dataObj, geo)}`);
-        setTooltipCasualties(`casualties: ${getValueFromCountryObject("deaths", dataObj, geo)}`);
+        setTooltipInfected(`cases: ${getValueFromCountryObject("cases", dataObj, geo)}`);
+        setTooltipCasualties(`fatalities: ${getValueFromCountryObject("deaths", dataObj, geo)}`);
         setTooltipRecovered(`recovered: ${getValueFromCountryObject("recovered", dataObj, geo)}`)
     }
     const handleMouseLeave = (dataObj) => {
         setTooltipGeo("Total");
-        setTooltipInfected(`infected: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
-        setTooltipCasualties(`casualties: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`)
+        setTooltipInfected(`cases: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
+        setTooltipCasualties(`fatalities: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`)
         setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`)
     }
 

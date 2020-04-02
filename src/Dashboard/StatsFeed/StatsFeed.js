@@ -15,8 +15,8 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
         const geo = country
         // setTooltipGeo('US')
         setTooltipGeo(getName(country))
-        setTooltipInfected(`infected: ${countriesObject[country].cases.toLocaleString()}`);
-        setTooltipCasualties(`casualties: ${countriesObject[country].deaths.toLocaleString()}`);
+        setTooltipInfected(`cases: ${countriesObject[country].cases.toLocaleString()}`);
+        setTooltipCasualties(`fatalities: ${countriesObject[country].deaths.toLocaleString()}`);
         setTooltipRecovered(`recovered: ${countriesObject[country].recovered.toLocaleString()}`)
     }
 

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {LineChart, ResponsiveContainer, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {LineChart, ResponsiveContainer, Brush, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import "./TimelineGraph.scss"
 
-//TODO: make object
 
 const TimelineGraph = ({geo}) => {
     const [timeObject, setTimeObject] = useState({});
-    const [country, setCountry] = useState('us')
+    const [timelineStart, setTimelineStart] = useState(15)
+    // const [country, setCountry] = useState('us')
 
     useEffect(() => {
         getGeoTimeline(geo);
@@ -38,6 +38,7 @@ const TimelineGraph = ({geo}) => {
             .then(data => makeObject(data, geo))
             .then(timelineObj => {
                 setTimeObject(timelineObj)
+                // setTimelineStart(() => timelineObj[geo].length - 15)
             })
             .catch(err => console.log('error fetching Data'))
     }
@@ -58,6 +59,22 @@ const TimelineGraph = ({geo}) => {
                     <Line type="monotone" dataKey="cases" stroke="#8884d8" activeDot={{r: 8}}/>
                     <Line type="monotone" dataKey="deaths" stroke="#ca829c"/>
                     {/*<Line type="monotone" dataKey="recovered" stroke="#82ca9d" />*/}
+
+                    <Brush
+                        dataKey='date'
+                        height={20}
+                        stroke="#b7b7b7"
+                        startIndex={15}
+                        // endIndex={10}
+                    >
+
+                        <LineChart>
+                            <Line dataKey="cases" fill="#8884d8" />
+                            <Line dataKey="deaths" fill="#ca829c" />
+                        </LineChart>
+
+                    </Brush>
+
                 </LineChart>
             </ResponsiveContainer>
         </div>
