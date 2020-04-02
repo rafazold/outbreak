@@ -64,13 +64,11 @@ function GraphHeader({geos, setGraphGeo, graphGeo}) {
     }
 
     return (
-        <div className="dashboard-header">
-            <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
-
+        <div className="graph-header">
             <span className="select-wrapper">
                 <Select
                 styles={customStyles}
-                className="dashboard-header-select"
+                className="graph-header-select"
                 defaultValue={options[0]}
                 value={selected}
                 onChange={handleChange}

@@ -60,6 +60,7 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
+            <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
             <Map setTooltipGeo={setTooltipGeo}
                  setTooltipInfected={setTooltipInfected}
                  setTooltipCasualties={setTooltipCasualties}

@@ -48,7 +48,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     <span className="feed-content-numbers-title">
                         <span className="feed-content-numbers-icon"><img src="./assets/grave.svg"
                                                                          alt="grave"/></span>
-                        <span className="feed-content-numbers-title-text">Casualties</span>
+                        <span className="feed-content-numbers-title-text">Fatalities</span>
                     </span>
                     <span className="feed-content-numbers-value">
                         {totalStats.deaths ? totalStats.deaths.toLocaleString() : 0}

@@ -56,6 +56,7 @@ function Reports() {
 
     return (
         <div className="reports-wrapper">
+                <header className="reports-title">Live Reports</header>
             <div className="reports-feed">
                 {newsLinks.map((link, index) => (
                     <article className={`report ${index > 3 ? hide : ""}`}>

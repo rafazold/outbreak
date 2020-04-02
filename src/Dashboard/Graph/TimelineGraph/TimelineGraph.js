@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-
-
-
-
-
+import {LineChart, ResponsiveContainer, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import "./TimelineGraph.scss"
 
 //TODO: make object
 
@@ -47,32 +43,25 @@ const TimelineGraph = ({geo}) => {
     }
 
     return (
-        <LineChart width={1000} height={250} data={timeObject[geo]}
-                   margin={{top: 5, right: 30, left: 0, bottom: 5}}>
-            <XAxis dataKey="date"/>
-            <YAxis type="number" domain={[2, 'auto']} />/>
-            <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip/>
-            <Legend />
-            <Line type="monotone" dataKey="cases" stroke="#8884d8" activeDot={{r: 8}}/>
-            <Line type="monotone" dataKey="deaths" stroke="#ca829c" />
-            {/*<Line type="monotone" dataKey="recovered" stroke="#82ca9d" />*/}
-        </LineChart>
+        <div className="graph-wrapper">
+            <ResponsiveContainer
+                width={1000}
+                height={250}>
+                <LineChart
+                    data={timeObject[geo]}
+                    margin={{top: 5, right: 30, left: 30, bottom: 5}}>
+                    <XAxis dataKey="date"/>
+                    <YAxis type="number" domain={[2, 'auto']} tickFormatter={(value) => value.toLocaleString()}/>
+                    <CartesianGrid strokeDasharray="3 3"/>
+                    <Tooltip formatter={(value) => value.toLocaleString()}/>
+                    <Legend/>
+                    <Line type="monotone" dataKey="cases" stroke="#8884d8" activeDot={{r: 8}}/>
+                    <Line type="monotone" dataKey="deaths" stroke="#ca829c"/>
+                    {/*<Line type="monotone" dataKey="recovered" stroke="#82ca9d" />*/}
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
     );
 }
 
 export default TimelineGraph;
-
-
-// const data = [
-//     {date: '2020-03-20', infected: 25489, deaths: 1398, recovered: 2210},
-//     {date: '2020-03-21', infected: 33276, deaths: 9800, recovered: 2290},
-//     {date: '2020-03-22', infected: 43847, deaths: 3908, recovered: 2000},
-//     {date: '2020-03-23', infected: 53740, deaths: 4800, recovered: 2181},
-//     {date: '2020-03-24', infected: 65778, deaths: 3800, recovered: 2500},
-//     {date: '2020-03-25', infected: 83836, deaths: 4300, recovered: 2100},
-// ];
-
-
-
-
