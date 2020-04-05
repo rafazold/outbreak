@@ -12,9 +12,9 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto row justify-content-start">
-                        <Nav.Link className="nav-link" href="#">Home</Nav.Link>
-                        <Nav.Link className="nav-link" href="#">About</Nav.Link>
-                        <Nav.Link className="nav-link" href="#">Contact</Nav.Link>
+                        {/*<Nav.Link className="nav-link" href="#">Home</Nav.Link>*/}
+                        {/*<Nav.Link className="nav-link" href="#">About</Nav.Link>*/}
+                        {/*<Nav.Link className="nav-link" href="#">Contact</Nav.Link>*/}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

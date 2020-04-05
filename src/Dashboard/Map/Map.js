@@ -6,39 +6,7 @@ import {
     Geographies,
     Geography
 } from "react-simple-maps";
-import geographyObject from "./countries2"
-
-const rounded = num => {
-    if (num > 1000000000) {
-        return Math.round(num / 100000000) / 10 + "Bn";
-    } else if (num > 1000000) {
-        return Math.round(num / 100000) / 10 + "M";
-    } else {
-        return Math.round(num / 100) / 10 + "K";
-    }
-};
-
-const formatName = (country) => {
-    if(country === 'China') {
-        return 'Mainland_China'
-    }
-    if(country === 'United States of America') {
-        return 'US'
-    }
-    const nameArr = country.split(' ');
-    const newArr = nameArr.map(str => {
-        if (str === ' ') {
-            return '_'
-        }
-        return str;
-    });
-    return newArr.join('_');
-
-};
-
-
-
-
+import geographyObject from "./countries"
 
 const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
     const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });

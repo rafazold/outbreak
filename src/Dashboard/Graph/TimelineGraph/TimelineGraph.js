@@ -57,23 +57,23 @@ const TimelineGraph = ({geo}) => {
                     <Tooltip formatter={(value) => value.toLocaleString()}/>
                     <Legend/>
                     <Line type="monotone" dataKey="cases" stroke="#8884d8" activeDot={{r: 8}}/>
-                    <Line type="monotone" dataKey="deaths" stroke="#ca829c"/>
+                    <Line type="monotone" dataKey="deaths" name="fatalities" stroke="#ca829c"/>
                     {/*<Line type="monotone" dataKey="recovered" stroke="#82ca9d" />*/}
 
-                    <Brush
-                        dataKey='date'
-                        height={20}
-                        stroke="#b7b7b7"
-                        startIndex={15}
-                        // endIndex={10}
-                    >
+                    {/*<Brush*/}
+                    {/*    dataKey='date'*/}
+                    {/*    height={20}*/}
+                    {/*    stroke="#b7b7b7"*/}
+                    {/*    startIndex={15}*/}
+                    {/*    // endIndex={10}*/}
+                    {/*>*/}
 
-                        <LineChart>
-                            <Line dataKey="cases" fill="#8884d8" />
-                            <Line dataKey="deaths" fill="#ca829c" />
-                        </LineChart>
+                    {/*    <LineChart>*/}
+                    {/*        <Line dataKey="cases" fill="#8884d8" />*/}
+                    {/*        <Line dataKey="deaths" fill="#ca829c" />*/}
+                    {/*    </LineChart>*/}
 
-                    </Brush>
+                    {/*</Brush>*/}
 
                 </LineChart>
             </ResponsiveContainer>

@@ -11,9 +11,6 @@ const { getCode, getName } = require('country-list');
 function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
 
     const tooltip = (country) => {
-
-        const geo = country
-        // setTooltipGeo('US')
         setTooltipGeo(getName(country))
         setTooltipInfected(`cases: ${countriesObject[country].cases.toLocaleString()}`);
         setTooltipCasualties(`fatalities: ${countriesObject[country].deaths.toLocaleString()}`);
@@ -57,8 +54,8 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 </div>
                 <div className="feed-content-source information">
                     <span className="feed-content-source-title">Source of outbreak</span>
-                    <span className="feed-content-source-flag">
-                    <Flag code={"CN"} height={"100%"}/>
+                    <span className="feed-content-source-flag" data-tip="">
+                        <Flag onMouseEnter={() => tooltip("CN")} code={"CN"} height={"100%"}/>
                 </span>
                 </div>
                 <div className="feed-content-countries information">

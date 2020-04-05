@@ -1,7 +1,7 @@
 
 .dashboard {
     display: grid;
-    margin-top: 1em;
+    margin-top: 2em;
     //grid-auto-rows: auto;
     //grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
@@ -19,7 +19,7 @@
         font-family: 'Poppins', sans-serif;
         font-size: 2.19em;
         font-weight: 600;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
     }
 }
 
