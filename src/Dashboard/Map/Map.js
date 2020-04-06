@@ -4,9 +4,10 @@ import {
     ZoomableGroup,
     ComposableMap,
     Geographies,
-    Geography
+    Geography, Marker
 } from "react-simple-maps";
 import geographyObject from "./countries"
+import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
 
 const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
     const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
@@ -38,20 +39,20 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
     }
 
     const handleMouseEnter =  (geo, dataObj) => {
-        const getValueFromCountryObject = (dataType, dataObj, geo) => {
-            if (typeof dataObj[(geo.properties.ISO_A2)] !== "undefined") {
-                return dataObj[(geo.properties.ISO_A2)][dataType].toLocaleString();
-            } else if (typeof dataObj[(geo.properties.WB_A2)] !== "undefined") {
-                return dataObj[(geo.properties.WB_A2)][dataType].toLocaleString();
-            }
-            return 0;
-        };
+        // const getValueFromCountryObject = (dataType, dataObj, geo) => {
+        //     if (typeof dataObj[(geo.properties.ISO_A2)] !== "undefined") {
+        //         return dataObj[(geo.properties.ISO_A2)][dataType].toLocaleString();
+        //     } else if (typeof dataObj[(geo.properties.WB_A2)] !== "undefined") {
+        //         return dataObj[(geo.properties.WB_A2)][dataType].toLocaleString();
+        //     }
+        //     return 0;
+        // };
 
         const { NAME } = geo.properties;
         setTooltipGeo(`${NAME}`);
-        setTooltipInfected(`cases: ${getValueFromCountryObject("cases", dataObj, geo)}`);
-        setTooltipCasualties(`fatalities: ${getValueFromCountryObject("deaths", dataObj, geo)}`);
-        setTooltipRecovered(`recovered: ${getValueFromCountryObject("recovered", dataObj, geo)}`)
+        setTooltipInfected(`cases: ${getValueFromCountryObject("cases", dataObj, geo).toLocaleString()}`);
+        setTooltipCasualties(`fatalities: ${getValueFromCountryObject("deaths", dataObj, geo).toLocaleString()}`);
+        setTooltipRecovered(`recovered: ${getValueFromCountryObject("recovered", dataObj, geo).toLocaleString()}`)
     }
     const handleMouseLeave = (dataObj) => {
         setTooltipGeo("Total");
@@ -60,19 +61,38 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
         setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`)
     }
 
+    const handleClick = (geo, dataObj) => {
+        const { NAME } = geo.properties;
+        console.log(`${NAME}: ${getValueFromCountryObject('casesPerOneMillion', dataObj, geo)}`)
+    }
+
     const lockScroll = () => {
         document.body.classList.add("lock-scroll")
     };
     const allowScroll = () => {
         document.body.classList.remove("lock-scroll")
     };
+    const geoColor = (geo) => {
+        const casesPerMillion = getValueFromCountryObject('casesPerOneMillion', countriesObject, geo);
+        if (casesPerMillion > 500) {
+            return '#FF0D3E'
+        } else if (casesPerMillion > 500) {
+            return '#FF5211'
+        } else if (casesPerMillion > 100) {
+            return '#F6A73F'
+        } else if (casesPerMillion > 10) {
+            return '#ECD1AE'
+        } else {
+            return '#999999'
+        }
+    }
 
     return (
 
 
         <div className="map" onMouseEnter={lockScroll} onMouseLeave={allowScroll}>
                 <ComposableMap
-                    data-tip=""
+                    // data-tip=""
                     width={800}
                     height={500}
                     style={{ width: "auto", height: "auto" }}
@@ -83,18 +103,23 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                     
 
                 >
-                    <Geographies geography={geographyObject} >
+                    <Geographies
+                        data-tip=""
+                        geography={geographyObject}
+                    >
                         {({geographies}) =>
                             geographies.map(geo => (
+
                                 <Geography
                                     key={geo.rsmKey}
                                     geography={geo}
                                     onWheel={handleWheel}
                                     onMouseEnter={() => handleMouseEnter(geo, countriesObject)}
+                                    onClick={() => handleClick(geo, countriesObject)}
                                     onMouseLeave={() => handleMouseLeave(countriesObject)}
                                     style={{
                                         default: {
-                                            fill: "#999",
+                                            fill: geoColor(geo),
                                             stroke: "#FFF",
                                             strokeWidth: 0.5,
                                             outline: "none",
@@ -112,6 +137,17 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                             ))
                         }
                     </Geographies>
+                    {/*{console.log(countriesObject)}*/}
+                    {/*{Object.values(countriesObject).map(geo => {*/}
+                    {/*    // if ()*/}
+                    {/*    if (geo.countryInfo) {*/}
+                    {/*        return (*/}
+                    {/*        <Marker coordinates={[geo.countryInfo.long, geo.countryInfo.lat]}>*/}
+                    {/*        <circle r={5} fill="#F53" opacity={`20%`}/>*/}
+                    {/*    </Marker>)}*/}
+
+                    {/*})}*/}
+                    {/*{Object.values(countriesObject).map(x => console.log(x))}*/}
                 </ZoomableGroup>
             </ComposableMap>
         </div>
