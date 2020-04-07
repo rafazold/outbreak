@@ -8,11 +8,10 @@
     }
     .report-wrapper {
         width: 300px;
-        .report {
-            a {
-                //display: none;
-            }
-        }
+    }
+    .load-more {
+        width: 90%;
+        height: 55px;
     }
 }
 
@@ -21,11 +20,18 @@
         font-size: 40px;
     }
     .report-wrapper {
-        width: 30%
+        width: 30%;
+    }
+    .load-more {
+        width: 452px;
+        height: 58px;
     }
 }
 
-.reports-feed {
+
+.reports-wrapper{
+    text-align: -webkit-center;
+    .reports-feed {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -44,9 +50,17 @@
     display: none;
 }
 
-.read-more {
+.load-more {
     text-align: center;
     cursor: pointer;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 10px 26px 0 rgba(86, 91, 128, 0.37);
+    background-color: #565b80;
+    color: white;
+    vertical-align: middle;
+    line-height: 58px;
+    margin: 60px 10px 100px 10px;
 }
 
 .reports-title {
@@ -54,4 +68,4 @@
     color: #565b80;
     font-weight: 600;
     margin: 1.5em 0 1em 0;
-}
+}}

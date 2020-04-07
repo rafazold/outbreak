@@ -5,7 +5,10 @@
 @include media-breakpoint-down(sm) {
     .graph-wrapper {
         width: 95vw;
-        height: 120px;
+        height: 180px;
+    }
+    .recharts-text {
+        font-size: 10px;
     }
 }
 

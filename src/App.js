@@ -7,6 +7,7 @@ import "./App.scss";
 import Header from "./Header/Header";
 import Dashboard from "./Dashboard/Dashboard";
 import {Container} from "react-bootstrap";
+import Footer from "./Footer/Footer";
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
         <Container>
             <Header/>
             <Dashboard/>
+            <Footer/>
         </Container>
     </div>
 )};

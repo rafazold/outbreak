@@ -28,7 +28,7 @@ function Reports() {
 
     return (
         <div className="reports-wrapper">
-                <header className="reports-title">Latest News</header>
+            <div className="reports-title">Latest News</div>
             <div className="reports-feed">
                 {newsLinks.map((link, index) => (
                     <div className="report-wrapper">
@@ -51,7 +51,7 @@ function Reports() {
                     </div>
                 ))}
             </div>
-            <div className="read-more" onClick={showReports}>Read more</div>
+            <div className="load-more" onClick={showReports}>Load more</div>
         </div>
     );
 }
