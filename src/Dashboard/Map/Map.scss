@@ -1,4 +1,19 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+@include media-breakpoint-down(sm) {
+    .map {
+        width: 100vw;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .map {
+        margin-left: 3vw;
+    }
+}
+
 .map {
     display: inline;
-    margin-left: 3vw;
 }

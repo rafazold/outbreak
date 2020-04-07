@@ -1,3 +1,28 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+@include media-breakpoint-down(sm) {
+    .select-wrapper {
+        .graph-header-select {
+            width: 300px;
+            .css-11msr9p-Control {
+                width: 100%;
+                }
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .graph-header {
+        .select-wrapper {
+            .graph-header-select {
+                width: 400px;
+            }
+        }
+    }
+}
+
 
 .graph-header {
     text-align: center;
@@ -16,7 +41,6 @@
             background-color: var(--white);
             text-align-last: center;
             color: #565b80;
-            width: 400px;
             &:focus {
                 outline: none;
             }

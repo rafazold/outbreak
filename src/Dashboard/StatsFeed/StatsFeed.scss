@@ -1,10 +1,98 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+@include media-breakpoint-down(sm) {
+    //Economica
+    .stats {
+        padding: 14px;
+
+    }
+    .stats-feed-header {
+        padding: 14px 0;
+    }
+    .feed-content-numbers {
+        .feed-content-numbers-item {
+            .feed-content-numbers-title {
+                .feed-content-numbers-icon {
+                }
+                .feed-content-numbers-title-text {
+                    font-size: 21px;
+                }
+            }
+            .feed-content-numbers-value {
+                font-size: 2em;
+                font-family: "Economica";
+                font-weight: bold;
+            }
+        }
+    }
+    .feed-content-source {
+        justify-content: space-between;
+        .feed-content-source-title {
+            font-size: 21px;
+        }
+    }
+    .feed-content-flags {
+        .feed-content-flag {
+            height: 26px;
+            width: 39px;
+            object-fit: scale-down;
+
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .stats-feed-header {
+        padding-bottom: 14px;
+    }
+    .feed-content-numbers {
+        .feed-content-numbers-item {
+            .feed-content-numbers-title {
+                font-size: 25px;
+                .feed-content-numbers-icon {
+                }
+                .feed-content-numbers-title-text {
+                }
+            }
+            .feed-content-numbers-value {
+                font-size: 50px;
+                font-family: "Odibee Sans";
+            }
+        }
+    }
+    .feed-content-source {
+        .feed-content-source-title {
+            font-size: 25px;
+        }
+    }
+    .feed-content-countries {
+        .feed-content-countries-title {
+            font-size: 25px;
+        }
+        .feed-content-flags {
+            .feed-content-flag {
+                height: 26px;
+
+                img{
+                    &:hover {
+                        border: solid black 1px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 .stats {
     //grid-column: 1 / 2;
 
     .stats-feed-header {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 14px;
         border-bottom: solid #565b8033 1px;
 
         .feed-title {
@@ -56,17 +144,13 @@
             .feed-content-numbers-title {
                 display: flex;
                 justify-content: flex-start;
-                font-size: 25px;
+
                 .feed-content-numbers-icon {
                     margin-right: 5px;
                 }
                 .feed-content-numbers-title-text {
 
                 }
-            }
-            .feed-content-numbers-value {
-                font-size: 50px;
-                font-family: "Odibee Sans";
             }
         }
     }
@@ -76,7 +160,6 @@
         border-bottom: solid #565b8033 1px;
 
         .feed-content-source-title {
-            font-size: 25px;
             margin-right: 15px;
         }
         .feed-content-source-flag {
@@ -84,6 +167,11 @@
             border-radius: 4px;
             overflow: hidden;
             height: 33px;
+            img {
+                &:hover {
+                    border: solid black 1px;
+                }
+            }
         }
     }
     .feed-content-countries {
@@ -92,7 +180,6 @@
 
         .feed-content-countries-title {
             display: block;
-            font-size: 25px;
             padding: 14px 0;
         }
         .feed-content-flags {
@@ -103,7 +190,6 @@
                 margin: 0 8px 8px 0;
                 border-radius: 4px;
                 overflow: hidden;
-                height: 26px;
 
                 img{
                     &:hover {

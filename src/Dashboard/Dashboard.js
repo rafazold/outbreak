@@ -66,6 +66,7 @@ function Dashboard() {
                  setTooltipCasualties={setTooltipCasualties}
                  setTooltipRecovered={setTooltipRecovered}
                  countriesObject={countriesObject}
+                 className="hideMobile"
             />
             <StatsFeed
                 totalStats={total}

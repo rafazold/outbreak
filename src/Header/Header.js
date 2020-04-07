@@ -9,14 +9,14 @@ const Header = () => {
         <header className="Header">
             <Navbar collapseOnSelect expand="lg" >
                 <Navbar.Brand className="navbar-brand header-brand" href="#home">The Epidemic Map</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto row justify-content-start">
+                {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
+                {/*<Navbar.Collapse id="basic-navbar-nav">*/}
+                {/*    <Nav className="mr-auto row justify-content-start">*/}
                         {/*<Nav.Link className="nav-link" href="#">Home</Nav.Link>*/}
                         {/*<Nav.Link className="nav-link" href="#">About</Nav.Link>*/}
                         {/*<Nav.Link className="nav-link" href="#">Contact</Nav.Link>*/}
-                    </Nav>
-                </Navbar.Collapse>
+                {/*    </Nav>*/}
+                {/*</Navbar.Collapse>*/}
             </Navbar>
         </header>
     );

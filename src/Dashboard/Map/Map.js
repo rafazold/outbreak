@@ -10,7 +10,7 @@ import geographyObject from "./countries"
 import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
 
 const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
-    const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
+    const [position, setPosition] = useState({ coordinates: [20, 0], zoom: 1 });
 
     const handleZoomIn = () => {
         if (position.zoom >= 4) return;
@@ -95,7 +95,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                     // data-tip=""
                     width={800}
                     height={500}
-                    style={{ width: "auto", height: "auto" }}
+                    style={{ width: "100%", height: "auto" }}
                 >
                 <ZoomableGroup
                     zoom={position.zoom}

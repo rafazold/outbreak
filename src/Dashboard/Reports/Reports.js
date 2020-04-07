@@ -31,21 +31,24 @@ function Reports() {
                 <header className="reports-title">Latest News</header>
             <div className="reports-feed">
                 {newsLinks.map((link, index) => (
-                    <article className={`report ${index > 11 ? hide : ""}`}>
-                        {/*    <LazyLoad*/}
-                        {/*    height={100}*/}
-                        {/*    placeholder={<span>wait</span>}*/}
-                        {/*>*/}
-                        <ReactTinyLink
-                            cardSize="small"
-                            width="30%"
-                            showGraphic={true}
-                            maxLine={2}
-                            minLine={1}
-                            url={link}
-                        />
-                        {/*</LazyLoad>*/}
-                    </article>
+                    <div className="report-wrapper">
+                        <article className={`report ${index > 11 ? hide : ""}`}>
+                            {/*    <LazyLoad*/}
+                            {/*    height={100}*/}
+                            {/*    placeholder={<span>wait</span>}*/}
+                            {/*>*/}
+                            <ReactTinyLink
+                                cardSize="small"
+                                width="100%"
+                                height="100%"
+                                showGraphic={true}
+                                maxLine={2}
+                                minLine={1}
+                                url={link}
+                            />
+                            {/*</LazyLoad>*/}
+                        </article>
+                    </div>
                 ))}
             </div>
             <div className="read-more" onClick={showReports}>Read more</div>

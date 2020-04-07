@@ -1,3 +1,21 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+@include media-breakpoint-down(sm) {
+    .graph-wrapper {
+        width: 95vw;
+        height: 120px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .graph-wrapper {
+        width: 1000px;
+        height: 250px;
+    }
+}
+
 .graph-wrapper {
     text-align: -webkit-center;
 }

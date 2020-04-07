@@ -46,8 +46,10 @@ const TimelineGraph = ({geo}) => {
     return (
         <div className="graph-wrapper">
             <ResponsiveContainer
-                width={1000}
-                height={250}>
+                width="100%"
+                height="100%"
+                minHeight={90}
+            >
                 <LineChart
                     data={timeObject[geo]}
                     margin={{top: 5, right: 30, left: 30, bottom: 5}}>

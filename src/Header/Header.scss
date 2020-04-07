@@ -1,21 +1,47 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap');
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins/_breakpoints";
 
-.Header {
-  background-color: #EFEFEF;
-}
+
 
 .header-brand {
-  color: #565b80 !important;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.19em;
-  font-weight: 600;
+    color: #565b80 !important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
-.navbar {
-  padding-left: 0;
+
+
+@include media-breakpoint-down(sm) {
+    .Header {
+        background-color: #ffffff;
+    }
+    .navbar {
+        text-align: center;
+        justify-content: center;
+        height: 48px;
+        padding: 0;
+    }
+    .header-brand {
+        font-size: 1.25em;
+    }
 }
+
+@include media-breakpoint-up(md) {
+    .Header {
+        background-color: #EFEFEF;
+    }
+    .navbar {
+        padding-left: 0;
+    }
+    .header-brand {
+        font-size: 1.19em;
+    }
+
+}
+
+
 
