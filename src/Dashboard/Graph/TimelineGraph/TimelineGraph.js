@@ -43,6 +43,19 @@ const TimelineGraph = ({geo}) => {
             .catch(err => console.log('error fetching Data'))
     }
 
+    const textSize = (value, entry) => {
+        console.log('value', value, 'entry', entry)
+        const width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+
+        if (width > 800) {
+            return 16;
+        } else {
+            return 10;
+        }
+    }
+
     return (
         <div className="graph-wrapper">
             <ResponsiveContainer
@@ -52,12 +65,15 @@ const TimelineGraph = ({geo}) => {
             >
                 <LineChart
                     data={timeObject[geo]}
-                    margin={{top: 5, right: 30, left: 30, bottom: 5}}>
+                    margin={{top: 5, right: 10, left: 0, bottom: 5}}>
                     <XAxis dataKey="date"/>
-                    <YAxis type="number" domain={[2, 'auto']} tickFormatter={(value) => value.toLocaleString()}/>
+                    <YAxis type="number" domain={[2, 'auto']} tickFormatter={(value) => value.toLocaleString('en-US', {
+                        notation: "compact",
+                        compactDisplay: "short"
+                    })}/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip formatter={(value) => value.toLocaleString()}/>
-                    <Legend/>
+                    <Legend />
                     <Line type="monotone" dataKey="cases" stroke="#8884d8" activeDot={{r: 8}}/>
                     <Line type="monotone" dataKey="deaths" name="fatalities" stroke="#ca829c"/>
                     {/*<Line type="monotone" dataKey="recovered" stroke="#82ca9d" />*/}

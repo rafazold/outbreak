@@ -61,11 +61,12 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 <div className="feed-content-countries information">
                     <span className="feed-content-countries-title">Most Affected Countries</span>
                     <div className="feed-content-flags" data-tip="">
-                        {infectedGeos.slice(0, 22).map(country => (
+                        {infectedGeos.map(country => {
+                            if (countriesObject[country].casesPerOneMillion > 1000 && countriesObject[country].cases > 1000) {return (
                         <span className="feed-content-flag">
-                            <Flag code={country} height={"100%"} onMouseEnter={() => tooltip(country)} />
+                            <Flag code={country} height={"100%"} width={"100%"} onMouseEnter={() => tooltip(country)} />
                         </span>
-                        ))}
+                        )}})}
                     </div>
                 </div>
             </div>

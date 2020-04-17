@@ -3,7 +3,6 @@
 @import "~bootstrap/scss/mixins/_breakpoints";
 
 @include media-breakpoint-down(sm) {
-    //Economica
     .stats {
         padding: 14px;
 
@@ -35,9 +34,9 @@
     }
     .feed-content-flags {
         .feed-content-flag {
-            height: 26px;
-            width: 39px;
-            object-fit: scale-down;
+            //height: 26px;
+            //width: 39px;
+            //object-fit: scale-down;
 
         }
     }
@@ -73,7 +72,7 @@
         }
         .feed-content-flags {
             .feed-content-flag {
-                height: 26px;
+                //height: 26px;
 
                 img{
                     &:hover {
@@ -185,11 +184,15 @@
         .feed-content-flags {
             display: flex;
             flex-wrap: wrap;
+            //justify-content: space-between;
             .feed-content-flag {
                 display: inline-block;
-                margin: 0 8px 8px 0;
+                margin: 0 7px 8px 0;
                 border-radius: 4px;
                 overflow: hidden;
+                height: 26px;
+                width: 39px;
+                object-fit: scale-down;
 
                 img{
                     &:hover {

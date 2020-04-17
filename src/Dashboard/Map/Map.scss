@@ -4,7 +4,12 @@
 
 @include media-breakpoint-down(sm) {
     .map {
-        width: 100vw;
+        width: 94vw;
+        justify-self: center;
+        .react-transform-component, .react-transform-element {
+            width: 94vw;
+            justify-self: center;
+        }
     }
 }
 
@@ -12,8 +17,15 @@
     .map {
         margin-left: 3vw;
     }
+    .react-transform-component, .react-transform-element {
+        width: 100% !important;
+    }
 }
 
 .map {
     display: inline;
+}
+
+.react-transform-component, .react-transform-element {
+    height: 100% !important;
 }

@@ -52,15 +52,29 @@ function GraphHeader({geos, setGraphGeo, graphGeo}) {
         return {value:'', label:''}
     };
 
+
     const customStyles = {
         option: (provided, state) => ({
             ...provided,
             padding: 20,
         }),
-        control: () => ({
-            width: 400,
+        control: () => {
+            const screenWidth = () => {
+                const width = window.innerWidth
+                || document.documentElement.clientWidth
+                || document.body.clientWidth;
+
+                if (width > 800) {
+                    return 400;
+                } else {
+                    return 300;
+                }
+            };
+
+            return ({
+            width: screenWidth,
             display: 'flex'
-        }),
+        })},
     }
 
     return (

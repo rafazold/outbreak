@@ -25,13 +25,13 @@ function Dashboard() {
 
 
     useEffect(() => {
-        fetch( 'https://corona.lmao.ninja/all')
+        fetch( 'https://corona.lmao.ninja/v2/all')
             .then(res => res.json())
             .then(total => setTotal(total))
     }, []);
 
     useEffect(() => {
-        fetch('https://corona.lmao.ninja/countries')
+        fetch('https://corona.lmao.ninja/v2/countries')
             .then(res => res.json())
             .then(countryArr => {
                 let countryObj = {totals: total};
