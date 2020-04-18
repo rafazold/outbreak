@@ -1,9 +1,9 @@
 import development from './development';
-// import production from './production';
+import production from './production';
 
 const env = {
     development,
-    // production
+    production
 };
 
 
