@@ -1,12 +1,12 @@
 import "./Dashboard.scss";
 import React, {useState, useEffect} from 'react';
-import GraphHeader from "./Graph/GraphHeader/GraphHeader";
 import Map from "./Map/Map";
 import ReactTooltip from "react-tooltip";
 import StatsFeed from "./StatsFeed/StatsFeed";
 import Reports from "./Reports/Reports";
-import TimelineGraph from "./Graph/TimelineGraph/TimelineGraph";
 import StatsFooter from "./StatsFooter/StatsFooter";
+import config from '../config';
+import hoursFromLastUpdate from "../helpers/hoursFromLastUpdate";
 const { getCode, getName } = require('country-list');
 
 
@@ -23,17 +23,26 @@ function Dashboard() {
     const [countryList, setCountryList] = useState([])
 
 
-
     useEffect(() => {
-        fetch( 'https://corona.lmao.ninja/v2/all')
-            .then(res => res.json())
-            .then(total => setTotal(total))
-    }, []);
+        getCurrentStats()
+    }, [])
 
-    useEffect(() => {
-        fetch('https://corona.lmao.ninja/v2/countries')
+    const getCurrentStats = () => {
+        fetch(`${config.apiUrl}/api/current`)
             .then(res => res.json())
-            .then(countryArr => {
+            .then(currStats => {
+                const totals = {
+                    updated: currStats[0].updated,
+                    cases: currStats[0].cases,
+                    deaths: currStats[0].deaths,
+                    recovered: currStats[0].recovered,
+                }
+                setTotal(totals);
+                return currStats[0];
+            })
+            .then(currentStats => {
+                console.log(currentStats)
+                const countryArr = currentStats.countries;
                 let countryObj = {totals: total};
                 let geoArr = [];
                 countryArr.forEach(country => {
@@ -46,9 +55,7 @@ function Dashboard() {
                 return countryObj
 
             })
-            .then(infected => {
-                setFetching(false)})
-    }, [total]);
+    }
 
     const infectedCountries = countryList.map(geo => {
         if (geo !== 'undefined') {

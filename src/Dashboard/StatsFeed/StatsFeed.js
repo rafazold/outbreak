@@ -63,7 +63,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     <div className="feed-content-flags" data-tip="">
                         {infectedGeos.map(country => {
                             if (countriesObject[country].casesPerOneMillion > 1000 && countriesObject[country].cases > 1000) {return (
-                        <span className="feed-content-flag">
+                        <span className="feed-content-flag" key={country}>
                             <Flag code={country} height={"100%"} width={"100%"} onMouseEnter={() => tooltip(country)} />
                         </span>
                         )}})}

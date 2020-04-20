@@ -69,7 +69,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
     };
 
     const handleTouch = (e) => {
-        console.log(e.changedTouches[0])
+        // console.log(e.changedTouches[0])
     };
 
     // const handleMoveEnd = (position) => {
