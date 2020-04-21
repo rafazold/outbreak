@@ -1,12 +1,8 @@
 import "./StatsFeed.scss";
 
 import React from 'react';
-import Flag from 'react-world-flags'
-import TimelineGraph from "../Graph/TimelineGraph/TimelineGraph";
-import GraphHeader from "../Graph/GraphHeader/GraphHeader";
-import ReactTooltip from "react-tooltip";
-import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
-const { getCode, getName } = require('country-list');
+import Flag from 'react-world-flags';
+const { getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
 

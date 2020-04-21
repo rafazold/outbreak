@@ -5,6 +5,7 @@
 @include media-breakpoint-down(sm) {
     .map {
         width: 94vw;
+        height: 40vh;
         justify-self: center;
         .react-transform-component, .react-transform-element {
             width: 94vw;

@@ -5,18 +5,16 @@ import config from '../../config';
 import LazyLoad from 'react-lazyload';
 
 
-function Reports() {
-    const [hide, setHide] = useState("hidden");
+function Reports({serverup}) {
     const [newsLinks, setNewsLinks] = useState([]);
     const [reportsPage, setReportsPage] = useState(0);
 
     useEffect(() => {
+        if (serverup)
+            console.log(3)
         getNewArticles()
-    }, [])
+    }, [serverup])
 
-    function showReports() {
-        setHide("");
-    }
     const handleClick = () => {
         getNewArticles()
     }

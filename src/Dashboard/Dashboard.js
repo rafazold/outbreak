@@ -6,8 +6,7 @@ import StatsFeed from "./StatsFeed/StatsFeed";
 import Reports from "./Reports/Reports";
 import StatsFooter from "./StatsFooter/StatsFooter";
 import config from '../config';
-import hoursFromLastUpdate from "../helpers/hoursFromLastUpdate";
-const { getCode, getName } = require('country-list');
+const { getName } = require('country-list');
 
 
 
@@ -16,16 +15,25 @@ function Dashboard() {
     const [tooltipInfected, setTooltipInfected] = useState("");
     const [tooltipCasualties, setTooltipCasualties] = useState("");
     const [tooltipRecovered, setTooltipRecovered] = useState("");
-    const affectedCountries = {};
     const [countriesObject, setCountriesObject] = useState({});
-    const [fetching, setFetching] = useState(true);
+    const [serverup, setServerup] = useState(false);
     const [total, setTotal] = useState({});
     const [countryList, setCountryList] = useState([])
 
+useEffect(() => {
+    fetch(`${config.apiUrl}/api/start`)
+        .then(res => {
+            if (res.status === 200) {
+                console.log(1)
+                setServerup(true)
+            }
+        })
+}, [])
 
     useEffect(() => {
+        console.log(2)
         getCurrentStats()
-    }, [])
+    }, [serverup])
 
     const getCurrentStats = () => {
         fetch(`${config.apiUrl}/api/current`)
@@ -41,7 +49,6 @@ function Dashboard() {
                 return currStats[0];
             })
             .then(currentStats => {
-                console.log(currentStats)
                 const countryArr = currentStats.countries;
                 let countryObj = {totals: total};
                 let geoArr = [];
@@ -51,7 +58,6 @@ function Dashboard() {
                 })
                 setCountriesObject(countryObj);
                 setCountryList(geoArr);
-                // console.log(geoArr)
                 return countryObj
 
             })
@@ -64,16 +70,19 @@ function Dashboard() {
         return getName(geo);
 
     })
-
+    const handleTouchStart = e => {
+        e.preventDefault()
+    }
     return (
-        <div className="dashboard">
+        <div className="dashboard"
+             onTouchStart={handleTouchStart}
+        >
             <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
             <Map setTooltipGeo={setTooltipGeo}
                  setTooltipInfected={setTooltipInfected}
                  setTooltipCasualties={setTooltipCasualties}
                  setTooltipRecovered={setTooltipRecovered}
                  countriesObject={countriesObject}
-                 className="hideMobile"
             />
             <StatsFeed
                 totalStats={total}
@@ -84,8 +93,9 @@ function Dashboard() {
                 setTooltipRecovered={setTooltipRecovered}
                 countriesObject={countriesObject}
             />
-            <p data-tip='' data-for='tooltip'></p>
+            <p data-tip='' data-for='tooltip' data-delay-hide='1000'></p>
             <ReactTooltip html={true}
+                          clickable={true}
                           id={tooltipGeo === '' ? '' : `tooltip`}
             >
                 {`${tooltipGeo}<br />
@@ -96,8 +106,7 @@ function Dashboard() {
             </ReactTooltip>
             <StatsFooter geos={infectedCountries}/>
             <div className="reports">
-
-                <Reports/>
+                <Reports serverup={serverup} />
             </div>
         </div>
     );

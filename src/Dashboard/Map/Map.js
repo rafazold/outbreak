@@ -5,7 +5,7 @@ import {
     ZoomableGroup,
     ComposableMap,
     Geographies,
-    Geography, Marker
+    Geography
 } from "react-simple-maps";
 import geographyObject from "./countries"
 import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
@@ -114,7 +114,12 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
     return (
 
 
-        <div className="map" onMouseEnter={lockScroll} onMouseLeave={allowScroll} onTouchEnd={handleTouch} onTouchStart={handleTouch}>
+        <div
+            className="map"
+            onMouseEnter={lockScroll}
+            onMouseLeave={allowScroll}
+            // onTouchEnd={handleTouch}
+            onTouchStart={handleTouch}>
             <TransformWrapper className="map1">
                 <TransformComponent>
                     <ComposableMap
@@ -142,7 +147,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                                         geography={geo}
                                         onWheel={handleWheel}
                                         onMouseEnter={() => handleMouseEnter(geo, countriesObject)}
-                                        onClick={() => handleClick(geo, countriesObject)}
+                                        // onClick={() => handleClick(geo, countriesObject)}
                                         onMouseLeave={() => handleMouseLeave(countriesObject)}
                                         style={{
                                             default: {
