@@ -5,7 +5,7 @@ import {
     ZoomableGroup,
     ComposableMap,
     Geographies,
-    Geography
+    Geography,
 } from "react-simple-maps";
 import geographyObject from "./countries"
 import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
@@ -88,9 +88,9 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
             || document.documentElement.clientWidth
             || document.body.clientWidth;
 
-        // if (width > 800) {
+        if (width > 800) {
             document.body.classList.add("lock-scroll")
-        // }
+        }
     };
     const allowScroll = () => {
         document.body.classList.remove("lock-scroll")

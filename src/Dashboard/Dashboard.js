@@ -24,14 +24,12 @@ useEffect(() => {
     fetch(`${config.apiUrl}/api/start`)
         .then(res => {
             if (res.status === 200) {
-                console.log(1)
                 setServerup(true)
             }
         })
 }, [])
 
     useEffect(() => {
-        console.log(2)
         getCurrentStats()
     }, [serverup])
 
