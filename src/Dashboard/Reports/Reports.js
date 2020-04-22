@@ -2,25 +2,27 @@ import React, {useEffect, useState} from 'react';
 import './Reports.scss'
 import { ReactTinyLink } from 'react-tiny-link';
 import config from '../../config';
-import LazyLoad from 'react-lazyload';
-
+const Loader = require('react-loader');
 
 function Reports({serverup}) {
     const [newsLinks, setNewsLinks] = useState([]);
     const [reportsPage, setReportsPage] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (serverup)
-            console.log(3)
-        getNewArticles()
+        if (serverup) {
+            getNewArticles()
+        }
     }, [serverup])
 
     const handleClick = () => {
+        setLoading(true);
         getNewArticles()
+            .then(() => setLoading(false))
     }
 
     const getNewArticles = (links = newsLinks) => {
-        fetch(`${config.apiUrl}/api/news?skip=${reportsPage}`)
+        return fetch(`${config.apiUrl}/api/news?skip=${reportsPage}`)
             .then(res => res.json())
             .then(result => {
                 result.forEach( article => {
@@ -62,7 +64,10 @@ function Reports({serverup}) {
                     </div>
                 ))}
             </div>
-            <div className="load-more" onClick={handleClick}>Load more</div>
+            <div className="load-more" onClick={handleClick}>
+
+                {loading ? <Loader color='white' /> : 'Load more'}
+            </div>
         </div>
     );
 }

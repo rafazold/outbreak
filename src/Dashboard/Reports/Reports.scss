@@ -25,6 +25,11 @@
     .load-more {
         width: 452px;
         height: 58px;
+        display: flex;
+        justify-content: center;
+        .loader {
+            position: relative;
+        }
     }
 }
 
