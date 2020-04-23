@@ -119,7 +119,8 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
             onMouseEnter={lockScroll}
             onMouseLeave={allowScroll}
             // onTouchEnd={handleTouch}
-            onTouchStart={handleTouch}>
+            // onTouchStart={handleTouch}
+            >
             <TransformWrapper className="map1">
                 <TransformComponent>
                     <ComposableMap
@@ -149,6 +150,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                                         onMouseEnter={() => handleMouseEnter(geo, countriesObject)}
                                         // onClick={() => handleClick(geo, countriesObject)}
                                         onMouseLeave={() => handleMouseLeave(countriesObject)}
+                                        onTouchStart={() => handleMouseEnter(geo, countriesObject)}
                                         style={{
                                             default: {
                                                 fill: geoColor(geo),
