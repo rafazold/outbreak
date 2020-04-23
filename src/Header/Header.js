@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <header className="Header">
             <Navbar collapseOnSelect expand="lg" >
-                <Navbar.Brand className="navbar-brand header-brand" href="#home">The Epidemic Map</Navbar.Brand>
+                <Navbar.Brand className="navbar-brand header-brand" href="#home"><img src="./covid19-logo.svg" alt="covid19"/></Navbar.Brand>
                 {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
                 {/*<Navbar.Collapse id="basic-navbar-nav">*/}
                 {/*    <Nav className="mr-auto row justify-content-start">*/}
