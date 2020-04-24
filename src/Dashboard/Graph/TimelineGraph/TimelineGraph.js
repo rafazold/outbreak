@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {LineChart, ResponsiveContainer, Brush, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import "./TimelineGraph.scss"
+import Numeral from 'numeral'
 
 
 const TimelineGraph = ({geo}) => {
@@ -67,10 +68,13 @@ const TimelineGraph = ({geo}) => {
                     data={timeObject[geo]}
                     margin={{top: 5, right: 10, left: 0, bottom: 5}}>
                     <XAxis dataKey="date"/>
-                    <YAxis type="number" domain={[2, 'auto']} tickFormatter={(value) => value.toLocaleString('en-US', {
-                        notation: "compact",
-                        compactDisplay: "short"
-                    })}/>
+                    <YAxis type="number" domain={[2, 'auto']} tickFormatter={(value) =>
+                    //     value.toLocaleString('en-US', {
+                    //     notation: "compact",
+                    //     compactDisplay: "short"
+                    // })
+                        Numeral(value).format('0a')
+                    }/>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <Tooltip formatter={(value) => value.toLocaleString()}/>
                     <Legend />
