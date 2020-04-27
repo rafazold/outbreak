@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import './Reports.scss'
 import { ReactTinyLink } from 'react-tiny-link';
 import config from '../../config';
+import Report from "./Report/Report";
+import Modal from 'react-bootstrap/Modal';
 const Loader = require('react-loader');
 
 function Reports({serverup}) {
-    const [newsLinks, setNewsLinks] = useState([]);
+    const [newsList, setNewsList] = useState([]);
     const [reportsPage, setReportsPage] = useState(0);
     const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         if (serverup) {
@@ -21,17 +24,17 @@ function Reports({serverup}) {
             .then(() => setLoading(false))
     }
 
-    const getNewArticles = (links = newsLinks) => {
+    const getNewArticles = (articlesList = newsList) => {
         return fetch(`${config.apiUrl}/api/news?skip=${reportsPage}`)
             .then(res => res.json())
             .then(result => {
                 result.forEach( article => {
-                    links.push(article.url)
+                    articlesList.push(article)
                 })
-                return links
+                return articlesList
             })
-            .then(urls => {
-                setNewsLinks(urls)
+            .then(articles => {
+                setNewsList(articles)
                 setReportsPage(reportsPage + 1)
             })
             .catch(() => console.log({message: 'error getting news'}))
@@ -39,28 +42,23 @@ function Reports({serverup}) {
 
     }
 
+
+
     return (
         <div className="reports-wrapper">
             <div className="reports-title">Latest News</div>
             <div className="reports-feed">
-                {newsLinks.map((link, index) => (
+                {newsList.map((story, index) => (
                     <div className="report-wrapper" key={index}>
-                        <article className={`report`}>
-                            {/*    <LazyLoad*/}
-                            {/*    height={100}*/}
-                            {/*    placeholder={<span>wait</span>}*/}
-                            {/*>*/}
-                            <ReactTinyLink
-                                cardSize="small"
-                                width="100%"
-                                height="100%"
-                                showGraphic={true}
-                                maxLine={2}
-                                minLine={1}
-                                url={link}
+                            <Report
+                                // handleShowModal={handleShowModal}
+                                url={story.url}
+                                image={story.urlToImage}
+                                headline={story.title}
+                                content={story.description}
+                                source={story.source.name}
+
                             />
-                            {/*</LazyLoad>*/}
-                        </article>
                     </div>
                 ))}
             </div>

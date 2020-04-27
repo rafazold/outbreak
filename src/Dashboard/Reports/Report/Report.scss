@@ -1,0 +1,74 @@
+
+.report {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.04);
+    background-color: #ffffff;
+    color: black;
+    cursor: pointer;
+    border: solid transparent 1px;
+    overflow: hidden;
+    .report-image-wrapper {
+        width: 125px;
+        height: 125px;
+        overflow: hidden;
+        .report-image {
+            width: 125px;
+            height: 125px;
+            object-fit: cover;
+        }
+
+    }
+    .report-content {
+        padding: 10px 15px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .report-content-header-text {
+            font-size: 16px;
+            font-weight: bold;
+            -webkit-box-flex: 1.2;
+            flex-grow: 1.2;
+            margin: 0;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            white-space: normal;
+            overflow: hidden;
+            text-align: left;
+            line-height: 1em;
+        }
+        .report-content-summary {
+            display: block;
+            display: -webkit-box;
+            max-width: 200px;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            text-align: left;
+            p {
+                margin: 0;
+            }
+        }
+        .report-content-footer {
+            text-align: left;
+            font-size: 12px;
+            -webkit-box-flex: 0;
+            flex-grow: 0;
+            margin: 0;
+            p {
+                margin: 0;
+            }
+        }
+    }
+    &:hover {
+        background: #565b8026;
+        border: solid #565b804D 1px;
+    }
+}
