@@ -68,13 +68,8 @@ useEffect(() => {
         return getName(geo);
 
     })
-    const handleTouchStart = e => {
-        e.preventDefault()
-    }
     return (
-        <div className="dashboard"
-             onTouchStart={handleTouchStart}
-        >
+        <div className="dashboard" >
             <h2 className="dashboard-header-title">See live outbreaks, reports and statistics</h2>
             <Map setTooltipGeo={setTooltipGeo}
                  setTooltipInfected={setTooltipInfected}

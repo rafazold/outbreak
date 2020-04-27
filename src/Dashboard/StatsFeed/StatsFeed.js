@@ -1,16 +1,29 @@
 import "./StatsFeed.scss";
 
-import React from 'react';
+import React, {useState} from 'react';
 import Flag from 'react-world-flags';
+import Modal from "react-bootstrap/Modal";
+import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject";
 const { getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
+    const [showModal, setShowModal] = useState(false)
+    const [reportUrl, setReportUrl] = useState();
+    const handleShowModal = (url) => {
+        setReportUrl(url)
+        console.log(url)
+        setShowModal(true);
+    };
+    const handleCloseModal = () => setShowModal(false);
 
     const tooltip = (country) => {
+        const cases = countriesObject[country].cases;
+        const fatalities = countriesObject[country].deaths;
+        const recovered = countriesObject[country].recovered;
         setTooltipGeo(getName(country))
-        setTooltipInfected(`cases: ${countriesObject[country].cases.toLocaleString()}`);
-        setTooltipCasualties(`fatalities: ${countriesObject[country].deaths.toLocaleString()}`);
-        setTooltipRecovered(`recovered: ${countriesObject[country].recovered.toLocaleString()}`)
+        setTooltipInfected(`cases: ${cases.toLocaleString()}`);
+        setTooltipCasualties(`fatalities: ${fatalities.toLocaleString()} (${Math.round(fatalities/cases*100).toLocaleString()}%)`);
+        setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`)
     }
 
     return (
@@ -20,9 +33,9 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 <span className="feed-title-top">World Wide</span>
                 <span className="feed-title-bottom">Coronavirus</span>
             </span>
-                <span className="feed-read">
-                    <a href="https://en.wikipedia.org/wiki/Coronavirus_disease_2019" target="_blank" >Read</a
-                    ></span>
+                <span className="feed-read" onClick={() => handleShowModal("https://en.wikipedia.org/wiki/Coronavirus_disease_2019")}>
+                    {/*<a href="https://en.wikipedia.org/wiki/Coronavirus_disease_2019" target="_blank" >Read</a>*/}
+                    Read</span>
             </header>
             <div className="feed-content">
                 <div className="feed-content-numbers information">
@@ -58,7 +71,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     <span className="feed-content-countries-title">Most Affected Countries</span>
                     <div className="feed-content-flags" data-tip="">
                         {infectedGeos.map(country => {
-                            if (countriesObject[country].casesPerOneMillion > 1000 && countriesObject[country].cases > 1000) {return (
+                            if (countriesObject[country].casesPerOneMillion > 1000 && countriesObject[country].cases > 1000 && countriesObject[country].deaths/countriesObject[country].cases > 0.06) {return (
                         <span className="feed-content-flag" key={country}>
                             <Flag code={country} height={"100%"} width={"100%"} onMouseEnter={() => tooltip(country)} />
                         </span>
@@ -66,6 +79,23 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showModal}
+                onHide={handleCloseModal}
+                centered
+                size="xl"
+            >
+                <Modal.Header closeButton>
+                    <img src="./covid19-logo.svg" alt=""/>
+                </Modal.Header>
+                <Modal.Body>
+                    <iframe
+                        className="report-iframe"
+                        src={reportUrl}
+                        allowFullScreen={true}
+                    />
+                </Modal.Body>
+            </Modal>
         </article>
     );
 }

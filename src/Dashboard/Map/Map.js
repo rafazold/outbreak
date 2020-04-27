@@ -51,16 +51,20 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
         // };
 
         const { NAME } = geo.properties;
+        const cases = getValueFromCountryObject("cases", dataObj, geo);
+        const fatalities = getValueFromCountryObject("deaths", dataObj, geo);
+        const recovered = getValueFromCountryObject("recovered", dataObj, geo);
         setTooltipGeo(`${NAME}`);
-        setTooltipInfected(`cases: ${getValueFromCountryObject("cases", dataObj, geo).toLocaleString()}`);
-        setTooltipCasualties(`fatalities: ${getValueFromCountryObject("deaths", dataObj, geo).toLocaleString()}`);
-        setTooltipRecovered(`recovered: ${getValueFromCountryObject("recovered", dataObj, geo).toLocaleString()}`)
+        setTooltipInfected(`cases: ${cases.toLocaleString()}`);
+        setTooltipCasualties(`fatalities: ${fatalities.toLocaleString()} (${Math.round(fatalities/cases*100).toLocaleString()}%)`);
+        setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`)
     };
     const handleMouseLeave = (dataObj) => {
-        setTooltipGeo("Total");
-        setTooltipInfected(`cases: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
-        setTooltipCasualties(`fatalities: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`);
-        setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`);
+        setTooltipGeo('');
+        // setTooltipGeo("Total");
+        // setTooltipInfected(`cases: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
+        // setTooltipCasualties(`fatalities: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`);
+        // setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`);
     };
 
     const handleClick = (geo, dataObj) => {
@@ -116,8 +120,8 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
 
         <div
             className="map"
-            onMouseEnter={lockScroll}
-            onMouseLeave={allowScroll}
+            // onMouseEnter={lockScroll}
+            // onMouseLeave={allowScroll}
             // onTouchEnd={handleTouch}
             // onTouchStart={handleTouch}
             >
@@ -132,6 +136,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                     <ZoomableGroup
                         zoom={position.zoom}
                         center={position.coordinates}
+                        // TODO: comment out the above for mobile if works now for iphone
                         // onMoveEnd={handleMoveEnd}
                         // onMoveStart={lockScroll}
 
