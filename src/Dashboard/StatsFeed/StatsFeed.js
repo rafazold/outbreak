@@ -3,7 +3,6 @@ import "./StatsFeed.scss";
 import React, {useState} from 'react';
 import Flag from 'react-world-flags';
 import Modal from "react-bootstrap/Modal";
-import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject";
 const { getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
@@ -34,7 +33,6 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 <span className="feed-title-bottom">Coronavirus</span>
             </span>
                 <span className="feed-read" onClick={() => handleShowModal("https://en.wikipedia.org/wiki/Coronavirus_disease_2019")}>
-                    {/*<a href="https://en.wikipedia.org/wiki/Coronavirus_disease_2019" target="_blank" >Read</a>*/}
                     Read</span>
             </header>
             <div className="feed-content">

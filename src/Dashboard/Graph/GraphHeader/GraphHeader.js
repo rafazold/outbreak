@@ -10,10 +10,6 @@ function GraphHeader({geos, setGraphGeo, graphGeo}) {
     const handleChange = selectedOption => {
         setSelected(selectedOption);
         setGraphGeo(selectedOption.value);
-        // this.setState(
-        //     { selectedOption },
-        //     () => console.log(`Option selected:`, this.state.selectedOption)
-        // );
     };
 
     useEffect( () => {
@@ -23,23 +19,9 @@ function GraphHeader({geos, setGraphGeo, graphGeo}) {
             countries.push(optionReducer(geo))}
         });
 
-        // let countries = [];
-        // console.log('starting', countries);
-        // geos.forEach((geo) => {
-        //     console.log('aa',geo)
-        //     countries.push(optionReducer(geo))
-        // })
-        // console.log(countries)
         setOptions(countries);
-        // const countryList = [...options, optionReducer()]
 
     }, [geos])
-
-    const handleSelect = (e) => {
-        // console.log('bla bla bla',e)
-        // const country = getName(e.target.value.toLowerCase());
-        setGraphGeo(e.value)
-    };
 
     const optionReducer = (value) => {
         if (value) {
@@ -51,7 +33,6 @@ function GraphHeader({geos, setGraphGeo, graphGeo}) {
         console.log('really??? ', value)
         return {value:'', label:''}
     };
-
 
     const customStyles = {
         option: (provided, state) => ({

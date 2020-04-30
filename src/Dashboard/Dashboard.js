@@ -8,8 +8,6 @@ import StatsFooter from "./StatsFooter/StatsFooter";
 import config from '../config';
 const { getName } = require('country-list');
 
-
-
 function Dashboard() {
     const [tooltipGeo, setTooltipGeo] = useState("");
     const [tooltipInfected, setTooltipInfected] = useState("");
@@ -57,7 +55,6 @@ useEffect(() => {
                 setCountriesObject(countryObj);
                 setCountryList(geoArr);
                 return countryObj
-
             })
     }
 

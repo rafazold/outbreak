@@ -43,9 +43,6 @@
 .dashboard {
     display: grid;
     margin-top: 2em;
-    //grid-auto-rows: auto;
-    //grid-template-columns: repeat(3, 1fr);
-
 
     .dashboard-header-title {
         grid-area: title;
@@ -57,13 +54,11 @@
 }
 
 .stats {
-    //grid-column: 1 / 2;
     grid-area: stats;
 }
 
 .map {
     grid-area: map;
-    //grid-column: 2 / 4;
 }
 
 .feed-content-graph {
@@ -71,7 +66,6 @@
 }
 
 .reports {
-    //grid-column: 1 / 4;
     grid-area: report;
     display: flex;
 }

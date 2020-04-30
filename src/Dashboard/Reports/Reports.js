@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Reports.scss'
-import { ReactTinyLink } from 'react-tiny-link';
 import config from '../../config';
 import Report from "./Report/Report";
-import Modal from 'react-bootstrap/Modal';
 const Loader = require('react-loader');
 
 function Reports({serverup}) {
@@ -42,7 +40,13 @@ function Reports({serverup}) {
 
     }
 
-
+    const removeBadTags = (str) => {
+        return str
+            .replace(/<ul>/g, '')
+            .replace(/<\/ul>/g, '')
+            .replace(/<li>/g, '')
+            .replace(/<\/li>/g, '')
+    }
 
     return (
         <div className="reports-wrapper">
@@ -51,11 +55,10 @@ function Reports({serverup}) {
                 {newsList.map((story, index) => (
                     <div className="report-wrapper" key={index}>
                             <Report
-                                // handleShowModal={handleShowModal}
                                 url={story.url}
                                 image={story.urlToImage}
                                 headline={story.title}
-                                content={story.description}
+                                content={removeBadTags(story.description)}
                                 source={story.source.name}
 
                             />

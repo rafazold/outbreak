@@ -41,15 +41,6 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
     };
 
     const handleMouseEnter =  (geo, dataObj) => {
-        // const getValueFromCountryObject = (dataType, dataObj, geo) => {
-        //     if (typeof dataObj[(geo.properties.ISO_A2)] !== "undefined") {
-        //         return dataObj[(geo.properties.ISO_A2)][dataType].toLocaleString();
-        //     } else if (typeof dataObj[(geo.properties.WB_A2)] !== "undefined") {
-        //         return dataObj[(geo.properties.WB_A2)][dataType].toLocaleString();
-        //     }
-        //     return 0;
-        // };
-
         const { NAME } = geo.properties;
         const cases = getValueFromCountryObject("cases", dataObj, geo);
         const fatalities = getValueFromCountryObject("deaths", dataObj, geo);
@@ -59,45 +50,8 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
         setTooltipCasualties(`fatalities: ${fatalities.toLocaleString()} (${Math.round(fatalities/cases*100).toLocaleString()}%)`);
         setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`)
     };
-    const handleMouseLeave = (dataObj) => {
+    const handleMouseLeave = () => {
         setTooltipGeo('');
-        // setTooltipGeo("Total");
-        // setTooltipInfected(`cases: ${typeof dataObj.totals.cases !== 'undefined' ? dataObj.totals.cases.toLocaleString() : 0}`);
-        // setTooltipCasualties(`fatalities: ${dataObj.totals.deaths ? dataObj.totals.deaths.toLocaleString() : 0}`);
-        // setTooltipRecovered(`recovered: ${ dataObj.totals.recovered ? dataObj.totals.recovered.toLocaleString() : 0}`);
-    };
-
-    const handleClick = (geo, dataObj) => {
-        const { NAME } = geo.properties;
-        console.log(`${NAME}: ${getValueFromCountryObject('casesPerOneMillion', dataObj, geo)}`)
-    };
-
-    const handleTouch = (e) => {
-        // console.log(e.changedTouches[0])
-    };
-
-    // const handleMoveEnd = (position) => {
-    //     console.log(position);
-    //     setPosition(position);
-    // }
-
-    function handleMoveEnd(position) {
-        console.log('aa', position)
-        setPosition(position);
-        console.log('bb', position)
-    }
-
-    const lockScroll = () => {
-        const width = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-
-        if (width > 800) {
-            document.body.classList.add("lock-scroll")
-        }
-    };
-    const allowScroll = () => {
-        document.body.classList.remove("lock-scroll")
     };
 
     const geoColor = (geo) => {
@@ -118,13 +72,7 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
     return (
 
 
-        <div
-            className="map"
-            // onMouseEnter={lockScroll}
-            // onMouseLeave={allowScroll}
-            // onTouchEnd={handleTouch}
-            // onTouchStart={handleTouch}
-            >
+        <div className="map" >
             <TransformWrapper className="map1">
                 <TransformComponent>
                     <ComposableMap
@@ -134,12 +82,9 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                         style={{ width: "100%", height: "auto" }}
                     >
                     <ZoomableGroup
+                        disablePanning={true}
                         zoom={position.zoom}
                         center={position.coordinates}
-                        // TODO: comment out the above for mobile if works now for iphone
-                        // onMoveEnd={handleMoveEnd}
-                        // onMoveStart={lockScroll}
-
                     >
                         <Geographies
                             data-tip=""
@@ -153,7 +98,6 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                                         geography={geo}
                                         onWheel={handleWheel}
                                         onMouseEnter={() => handleMouseEnter(geo, countriesObject)}
-                                        // onClick={() => handleClick(geo, countriesObject)}
                                         onMouseLeave={() => handleMouseLeave(countriesObject)}
                                         onTouchStart={() => handleMouseEnter(geo, countriesObject)}
                                         style={{
@@ -176,17 +120,6 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
                                 ))
                             }
                         </Geographies>
-                        {/*{console.log(countriesObject)}*/}
-                        {/*{Object.values(countriesObject).map(geo => {*/}
-                        {/*    // if ()*/}
-                        {/*    if (geo.countryInfo) {*/}
-                        {/*        return (*/}
-                        {/*        <Marker coordinates={[geo.countryInfo.long, geo.countryInfo.lat]}>*/}
-                        {/*        <circle r={5} fill="#F53" opacity={`20%`}/>*/}
-                        {/*    </Marker>)}*/}
-
-                        {/*})}*/}
-                        {/*{Object.values(countriesObject).map(x => console.log(x))}*/}
                     </ZoomableGroup>
                 </ComposableMap>
             </TransformComponent>

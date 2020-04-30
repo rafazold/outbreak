@@ -32,14 +32,6 @@
             font-size: 21px;
         }
     }
-    .feed-content-flags {
-        .feed-content-flag {
-            //height: 26px;
-            //width: 39px;
-            //object-fit: scale-down;
-
-        }
-    }
 }
 
 @include media-breakpoint-up(md) {
@@ -72,8 +64,6 @@
         }
         .feed-content-flags {
             .feed-content-flag {
-                //height: 26px;
-
                 img{
                     &:hover {
                         border: solid black 1px;
@@ -87,8 +77,6 @@
 
 
 .stats {
-    //grid-column: 1 / 2;
-
     .stats-feed-header {
         display: flex;
         justify-content: space-between;
@@ -185,7 +173,6 @@
         .feed-content-flags {
             display: flex;
             flex-wrap: wrap;
-            //justify-content: space-between;
             .feed-content-flag {
                 display: inline-block;
                 margin: 0 7px 8px 0;
