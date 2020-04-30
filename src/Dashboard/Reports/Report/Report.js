@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './Report.scss'
 
-function Report({image, headline, content, source, url, handleShowModal}) {
+function Report({image, headline, content, source, url}) {
 
 
 
     return (
-        <article className="report-card" /*onClick={() => handleShowModal(url)}*/>
+        <article className="report-card" >
             <a className="report" href={url} target="_blank">
                 <span className="report-image-wrapper">
                     <img className="report-image"
