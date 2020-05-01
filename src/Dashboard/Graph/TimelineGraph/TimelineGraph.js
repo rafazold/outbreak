@@ -34,7 +34,7 @@ const TimelineGraph = ({geo}) => {
 
     const getGeoTimeline = (geo) => {
 
-        fetch(`https://corona.lmao.ninja/v2/historical/${geo}`)
+        fetch(`https://disease.sh/v2/historical/${geo}?lastdays=60`)
             .then(res => res.json())
             .then(data => makeObject(data, geo))
             .then(timelineObj => {
