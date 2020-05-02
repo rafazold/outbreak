@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import GraphHeader from "../Graph/GraphHeader/GraphHeader";
-import TimelineGraph from "../Graph/TimelineGraph/TimelineGraph";
+import GraphHeader from "./GraphHeader/GraphHeader";
+import TimelineGraph from "./TimelineGraph/TimelineGraph";
 
 function StatsFooter({geos}) {
     const [graphGeo, setGraphGeo] = useState('usa');

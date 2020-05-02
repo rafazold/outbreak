@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {LineChart, ResponsiveContainer, Brush, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import "./TimelineGraph.scss"
-import Numeral from 'numeral'
+import "./TimelineGraph.scss";
+import Numeral from 'numeral';
+const { getCode } = require('country-list');
 
 
 const TimelineGraph = ({geo}) => {
     const [timeObject, setTimeObject] = useState({});
-    const [timelineStart, setTimelineStart] = useState(15)
-    // const [country, setCountry] = useState('us')
 
     useEffect(() => {
         getGeoTimeline(geo);
@@ -33,8 +32,15 @@ const TimelineGraph = ({geo}) => {
 
 
     const getGeoTimeline = (geo) => {
+        const country = (geo) => {
+            if (geo.length > 3) {
+                return getCode(geo);
+            } else {
+                return geo;
+            }
+        }
 
-        fetch(`https://disease.sh/v2/historical/${geo}?lastdays=60`)
+        fetch(`https://disease.sh/v2/historical/${country(geo)}?lastdays=60`)
             .then(res => res.json())
             .then(data => makeObject(data, geo))
             .then(timelineObj => {
