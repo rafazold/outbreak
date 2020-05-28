@@ -3,6 +3,7 @@ import "./StatsFeed.scss";
 import React, {useState} from 'react';
 import Flag from 'react-world-flags';
 import Modal from "react-bootstrap/Modal";
+import Header from "../../Header/Header";
 const { getName } = require('country-list');
 
 function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
@@ -84,7 +85,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                 size="xl"
             >
                 <Modal.Header closeButton>
-                    <img src="./covid19-logo.svg" alt=""/>
+                    <Header/>
                 </Modal.Header>
                 <Modal.Body>
                     <iframe
