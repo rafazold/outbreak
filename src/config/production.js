@@ -1,3 +1,3 @@
 export default {
-    apiUrl: 'https://outbreak-api.herokuapp.com'
+    apiUrl: 'https://outbreak-db.herokuapp.com'
 }
