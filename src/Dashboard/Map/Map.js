@@ -10,7 +10,7 @@ import {
 import geographyObject from "./countries"
 import getValueFromCountryObject from "../../helpers/getValuesFromCountryObject"
 
-const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
+const Map = ({ setTooltipGeo, setTooltipInfected, setTooltipNewCases, countriesObject, setTooltipCasualties, setTooltipRecovered }) => {
     const [position, setPosition] = useState({ coordinates: [20, 0], zoom: 1 });
 
 
@@ -45,24 +45,27 @@ const Map = ({ setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCas
         const cases = getValueFromCountryObject("cases", dataObj, geo);
         const fatalities = getValueFromCountryObject("deaths", dataObj, geo);
         const recovered = getValueFromCountryObject("recovered", dataObj, geo);
+        const newCases = getValueFromCountryObject("todayCases", dataObj, geo);
         setTooltipGeo(`${NAME}`);
         setTooltipInfected(`cases: ${cases.toLocaleString()}`);
         setTooltipCasualties(`fatalities: ${fatalities.toLocaleString()} (${Math.round(fatalities/cases*100).toLocaleString()}%)`);
         setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`)
+        setTooltipNewCases(`today cases: ${newCases.toLocaleString()}`);
     };
     const handleMouseLeave = () => {
         setTooltipGeo('');
     };
 
     const geoColor = (geo) => {
-        const casesPerMillion = getValueFromCountryObject('casesPerOneMillion', countriesObject, geo);
-        if (casesPerMillion > 1000) {
+        // const casesPerMillion = getValueFromCountryObject('casesPerOneMillion', countriesObject, geo);
+        const todayCases = getValueFromCountryObject('todayCases', countriesObject, geo);
+        if (todayCases > 5000) {
             return '#FF0D3E'
-        } else if (casesPerMillion > 500) {
+        } else if (todayCases > 2500) {
             return '#FF5211'
-        } else if (casesPerMillion > 100) {
+        } else if (todayCases > 1000) {
             return '#F6A73F'
-        } else if (casesPerMillion > 10) {
+        } else if (todayCases > 100) {
             return '#ECD1AE'
         } else {
             return '#999999'

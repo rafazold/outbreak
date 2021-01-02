@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Header from "../../Header/Header";
 const { getName } = require('country-list');
 
-function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
+function StatsFeed({totalStats, infectedGeos,setTooltipNewCases, setTooltipGeo, setTooltipInfected, countriesObject, setTooltipCasualties, setTooltipRecovered}) {
     const [showModal, setShowModal] = useState(false)
     const [reportUrl, setReportUrl] = useState();
     const handleShowModal = (url) => {
@@ -20,10 +20,12 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
         const cases = countriesObject[country].cases;
         const fatalities = countriesObject[country].deaths;
         const recovered = countriesObject[country].recovered;
+        const newCases = countriesObject[country].todayCases;
         setTooltipGeo(getName(country))
         setTooltipInfected(`cases: ${cases.toLocaleString()}`);
         setTooltipCasualties(`fatalities: ${fatalities.toLocaleString()} (${Math.round(fatalities/cases*100).toLocaleString()}%)`);
-        setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`)
+        setTooltipRecovered(`recovered: ${recovered.toLocaleString()} (${Math.round(recovered/cases*100).toLocaleString()}%)`);
+        setTooltipNewCases(`today cases: ${newCases.toLocaleString()}`);
     }
 
     return (
@@ -70,7 +72,7 @@ function StatsFeed({totalStats, infectedGeos, setTooltipGeo, setTooltipInfected,
                     <span className="feed-content-countries-title">Most Affected Countries</span>
                     <div className="feed-content-flags" data-tip="">
                         {infectedGeos.map(country => {
-                            if (countriesObject[country].casesPerOneMillion > 1000 && countriesObject[country].cases > 1000 && countriesObject[country].deaths/countriesObject[country].cases > 0.04) {return (
+                            if (countriesObject[country].todayCases > 5000 && countriesObject[country].cases > 1000 ) {return (
                         <span className="feed-content-flag" key={country}>
                             <Flag code={country} height={"100%"} width={"100%"} onMouseEnter={() => tooltip(country)} />
                         </span>

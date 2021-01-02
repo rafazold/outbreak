@@ -16,16 +16,17 @@ function Dashboard() {
     const [countriesObject, setCountriesObject] = useState({});
     const [serverup, setServerup] = useState(false);
     const [total, setTotal] = useState({});
-    const [countryList, setCountryList] = useState([])
+    const [countryList, setCountryList] = useState([]);
+    const [tooltipNewCases, setTooltipNewCases] = useState("")
 
-useEffect(() => {
-    fetch(`${config.apiUrl}/api/start`)
-        .then(res => {
-            if (res.status === 200) {
-                setServerup(true)
-            }
-        })
-}, [])
+    useEffect(() => {
+        fetch(`${config.apiUrl}/api/start`)
+            .then(res => {
+                if (res.status === 200) {
+                    setServerup(true)
+                }
+            })
+    }, [])
 
     useEffect(() => {
         getCurrentStats()
@@ -72,6 +73,7 @@ useEffect(() => {
                  setTooltipInfected={setTooltipInfected}
                  setTooltipCasualties={setTooltipCasualties}
                  setTooltipRecovered={setTooltipRecovered}
+                 setTooltipNewCases={setTooltipNewCases}
                  countriesObject={countriesObject}
             />
             <StatsFeed
@@ -81,6 +83,7 @@ useEffect(() => {
                 setTooltipInfected={setTooltipInfected}
                 setTooltipCasualties={setTooltipCasualties}
                 setTooltipRecovered={setTooltipRecovered}
+                setTooltipNewCases={setTooltipNewCases}
                 countriesObject={countriesObject}
             />
             <p data-tip='' data-for='tooltip' data-delay-hide='1000'></p>
@@ -91,10 +94,11 @@ useEffect(() => {
                 {`${tooltipGeo}<br />
                 ${tooltipInfected}<br />
                 ${tooltipCasualties}<br />
-                ${tooltipRecovered}`
+                ${tooltipRecovered}<br/>
+                ${tooltipNewCases}`
                 }
             </ReactTooltip>
-            <StatsFooter geos={infectedCountries}/>
+            <StatsFooter geos={infectedCountries} countriesObject={countriesObject}/>
             <div className="reports">
                 <Reports serverup={serverup} />
             </div>

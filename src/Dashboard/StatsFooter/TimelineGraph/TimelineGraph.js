@@ -51,7 +51,6 @@ const TimelineGraph = ({geo}) => {
     }
 
     const textSize = (value, entry) => {
-        console.log('value', value, 'entry', entry)
         const width = window.innerWidth
             || document.documentElement.clientWidth
             || document.body.clientWidth;
