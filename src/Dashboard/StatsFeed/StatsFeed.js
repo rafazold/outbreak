@@ -11,7 +11,6 @@ function StatsFeed({totalStats, infectedGeos,setTooltipNewCases, setTooltipGeo, 
     const [reportUrl, setReportUrl] = useState();
     const handleShowModal = (url) => {
         setReportUrl(url)
-        console.log(url)
         setShowModal(true);
     };
     const handleCloseModal = () => setShowModal(false);
